@@ -1,0 +1,10 @@
+{
+    "login": {
+        "hello": "Ask2Movie uygulamasına hoş geldiniz.",
+        "loginMessage": "Uygulamaya gir.",
+        "loginTitle": "Giriş."
+    },
+    "project": {
+        "name": "Ask2Movie ye hoş geldin !"
+    }
+}
