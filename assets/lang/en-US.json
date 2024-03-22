@@ -1,7 +1,22 @@
 {
+    "base": {
+        "email": "E-mail",
+        "password": "Password",
+        "googleLogin": "{} with Google",
+        "appleLogin": "{} with Apple ID",
+        "facebookLogin": "{} with Facebook"
+    },
     "login": {
-        "hello": "Welcome to Ask2Movie application.",
-        "loginMessage": "Login to application.",
-        "loginTitle": "Login."
+        "loginTitle": "Login.",
+        "forgotPassword": "Forgot Password?",
+        "login": "Log in!",
+        "doHaveAccount": "Don't have an account? Sign up!",
+        "or": "OR"
+    },
+    "signIn": {
+        "registerTitle": "Register.",
+        "userName": "User Name",
+        "signUp": "Sign Up!",
+        "alreadyHaveAccount": "Already have an account? Log in!"
     }
 }
