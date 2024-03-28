@@ -1,20 +1,20 @@
-import 'demos/sign_in_view.dart';
+import 'package:ask2movie/core/device/constants.dart';
+import 'package:ask2movie/screens/home_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import 'core/device/constants.dart';
-import 'demos/login_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  runApp(EasyLocalization(
-    supportedLocales: const [AppConstant.EN_LOCALE, AppConstant.TR_LOCALE],
-    path: AppConstant.LANG_PATH,
-    fallbackLocale: const Locale('tr', 'TR'),
-    child: const MyApp(),
-  ));
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locales.en.locale],
+      path: Locales.path,
+      fallbackLocale: Locales.en.locale,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home: const HomeView(),
     );
   }
 }

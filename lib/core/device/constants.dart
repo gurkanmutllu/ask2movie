@@ -1,7 +1,12 @@
 import 'package:flutter/rendering.dart';
 
-class AppConstant {
-  static const TR_LOCALE = Locale("tr", "TR");
-  static const EN_LOCALE = Locale("en", "US");
-  static const LANG_PATH = "assets/lang";
+enum Locales {
+  tr(locale: Locale('tr', 'TR')),
+  en(locale: Locale('en', 'US')),
+  ;
+
+  const Locales({required this.locale});
+  final Locale locale;
+
+  static const path = 'assets/lang';
 }

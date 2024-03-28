@@ -2,9 +2,11 @@
     "base": {
         "email": "E-mail",
         "password": "Password",
+        "userName": "User Name",
         "googleLogin": "{} with Google",
         "appleLogin": "{} with Apple ID",
-        "facebookLogin": "{} with Facebook"
+        "facebookLogin": "{} with Facebook",
+        "seeMore": "See More"
     },
     "login": {
         "loginTitle": "Login.",
@@ -15,8 +17,17 @@
     },
     "signIn": {
         "registerTitle": "Register.",
-        "userName": "User Name",
+        
         "signUp": "Sign Up!",
         "alreadyHaveAccount": "Already have an account? Log in!"
+    },
+    "editProfile": {
+        "editProfileTitle": "Edit Profile.",
+        "changePhoto": "Change Profile Photo",
+        "saveChanges": "Save Changes."
+    },
+    "home": {
+        "homeTitle": "Top Five.",
+        "latest": "Latest."
     }
 }

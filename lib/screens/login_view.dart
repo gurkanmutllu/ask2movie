@@ -1,25 +1,17 @@
-import '../core/init/locale_keys.g.dart';
+import 'package:ask2movie/core/init/locale_keys.g.dart';
+import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/buttons/custom_elevated_button.dart';
+import 'package:ask2movie/customs/text_fields/custom_text_field.dart';
+import 'package:ask2movie/customs/texts/title_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import 'custom_elevated_button.dart';
-import 'custom_elevated_button_with_icon.dart';
-import 'custom_text_field.dart';
-import 'title_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'padding_items.dart';
-
-class LoginView extends StatefulWidget {
+class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  @override
   Widget build(BuildContext context) {
-    final String _login = 'Log in';
+    const login = 'Log in';
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
@@ -43,7 +35,8 @@ class _LoginViewState extends State<LoginView> {
                   onTap: () {},
                   child: Text(
                     LocaleKeys.login_forgotPassword.tr(),
-                    style: const TextStyle(decoration: TextDecoration.underline),
+                    style:
+                        const TextStyle(decoration: TextDecoration.underline),
                   ),
                 ),
               ],
@@ -54,23 +47,24 @@ class _LoginViewState extends State<LoginView> {
               textColor: Colors.black,
             ),
             CustomElevatedButton(
-                buttonText: LocaleKeys.login_doHaveAccount.tr(),
-                buttonColor: Colors.transparent,
-                textColor: Colors.white),
+              buttonText: LocaleKeys.login_doHaveAccount.tr(),
+              buttonColor: Colors.transparent,
+              textColor: Colors.white,
+            ),
             Padding(
               padding: PaddingItems.verticalPadding,
               child: Text(LocaleKeys.login_or.tr()),
             ),
-            CustomElevatedButtonWithIcon(
-              buttonText: LocaleKeys.base_googleLogin.tr(args: [_login]),
+            CustomElevatedButton.icon(
+              buttonText: LocaleKeys.base_googleLogin.tr(args: [login]),
               buttonIcon: Icons.g_mobiledata_outlined,
             ),
-            CustomElevatedButtonWithIcon(
-              buttonText: LocaleKeys.base_appleLogin.tr(args: [_login]),
+            CustomElevatedButton.icon(
+              buttonText: LocaleKeys.base_appleLogin.tr(args: [login]),
               buttonIcon: Icons.apple_outlined,
             ),
-            CustomElevatedButtonWithIcon(
-              buttonText: LocaleKeys.base_facebookLogin.tr(args: [_login]),
+            CustomElevatedButton.icon(
+              buttonText: LocaleKeys.base_facebookLogin.tr(args: [login]),
               buttonIcon: Icons.facebook_outlined,
             ),
           ],
