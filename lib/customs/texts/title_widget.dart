@@ -1,11 +1,10 @@
+import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:flutter/material.dart';
-
-import 'padding_items.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
-    super.key,
     required this.title,
+    super.key,
   });
 
   final String title;
@@ -17,7 +16,10 @@ class TitleWidget extends StatelessWidget {
       padding: PaddingItems.bottomPadding,
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headlineLarge?.copyWith(color: Colors.amber, fontWeight: FontWeight.w900),
+        style: Theme.of(context)
+            .textTheme
+            .headlineLarge
+            ?.copyWith(color: Colors.amber, fontWeight: FontWeight.w900),
       ),
     );
   }

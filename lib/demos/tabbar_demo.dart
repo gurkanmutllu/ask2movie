@@ -1,3 +1,7 @@
+import 'package:ask2movie/screens/edit_profile_view.dart';
+import 'package:ask2movie/screens/home_view.dart';
+import 'package:ask2movie/screens/login_view.dart';
+import 'package:ask2movie/screens/sign_in_view.dart';
 import 'package:flutter/material.dart';
 
 class TabBarTemplate extends StatefulWidget {
@@ -7,12 +11,16 @@ class TabBarTemplate extends StatefulWidget {
   State<TabBarTemplate> createState() => _TabBarTemplateState();
 }
 
-class _TabBarTemplateState extends State<TabBarTemplate> with TickerProviderStateMixin {
+class _TabBarTemplateState extends State<TabBarTemplate>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: _MyTabViews.values.length, vsync: this);
+    _tabController = TabController(
+      length: _MyTabViews.values.length,
+      vsync: this,
+    );
   }
 
   @override
@@ -22,7 +30,6 @@ class _TabBarTemplateState extends State<TabBarTemplate> with TickerProviderStat
       child: Scaffold(
         extendBody: true,
         bottomNavigationBar: BottomAppBar(child: _myTabView()),
-        appBar: AppBar(),
         body: _tabbarView(),
       ),
     );
@@ -30,23 +37,30 @@ class _TabBarTemplateState extends State<TabBarTemplate> with TickerProviderStat
 
   TabBar _myTabView() {
     return TabBar(
-        padding: EdgeInsets.zero,
-        onTap: (int index) {},
-        controller: _tabController,
-        tabs: _MyTabViews.values
-            .map((e) => Tab(
-                  child: Icon(_getIconData(e)),
-                ))
-            .toList());
+      padding: EdgeInsets.zero,
+      onTap: (int index) {},
+      controller: _tabController,
+      tabs: _MyTabViews.values
+          .map(
+            (e) => Tab(
+              child: Icon(_getIconData(e)),
+            ),
+          )
+          .toList(),
+    );
   }
 
   TabBarView _tabbarView() {
-    return TabBarView(physics: const NeverScrollableScrollPhysics(), controller: _tabController, children: [
-      Container(color: Colors.red),
-      Container(color: Colors.blue),
-      Container(color: Colors.amber),
-      Container(color: Colors.black)
-    ]);
+    return TabBarView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: _tabController,
+      children: const [
+        HomeView(),
+        LoginView(),
+        SignInView(),
+        EditProfileView(),
+      ],
+    );
   }
 }
 

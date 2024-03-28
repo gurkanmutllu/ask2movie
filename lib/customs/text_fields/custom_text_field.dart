@@ -1,25 +1,24 @@
-import '../core/init/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:flutter/material.dart';
-
-import 'padding_items.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
-    super.key,
     required this.labelText,
     required this.inputType,
+    this.isObscure = false,
+    super.key,
   });
 
   final String labelText;
   final TextInputType inputType;
+  final bool isObscure;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: PaddingItems.verticalPadding,
       child: TextField(
-        obscureText: isPassword(labelText),
+        obscureText: isObscure,
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
           labelText: labelText,
@@ -27,13 +26,5 @@ class CustomTextField extends StatelessWidget {
         keyboardType: inputType,
       ),
     );
-  }
-}
-
-bool isPassword(String labelText) {
-  if (labelText == LocaleKeys.base_password.tr()) {
-    return true;
-  } else {
-    return false;
   }
 }
