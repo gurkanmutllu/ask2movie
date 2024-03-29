@@ -14,60 +14,69 @@ class LoginView extends StatelessWidget {
     const login = 'Log in';
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: const Icon(Icons.login_outlined),
+        title: Padding(
+          padding: PaddingItems.topPadding,
+          child: TitleWidget(title: LocaleKeys.login_loginTitle.tr()),
+        ),
+      ),
       body: Padding(
         padding: PaddingItems.horizontalPadding,
-        child: Column(
-          children: [
-            TitleWidget(title: LocaleKeys.login_loginTitle.tr()),
-            CustomTextField(
-              labelText: LocaleKeys.base_email.tr(),
-              inputType: TextInputType.emailAddress,
-            ),
-            CustomTextField(
-              labelText: LocaleKeys.base_password.tr(),
-              inputType: TextInputType.text,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    LocaleKeys.login_forgotPassword.tr(),
-                    style:
-                        const TextStyle(decoration: TextDecoration.underline),
+        child: Padding(
+          padding: PaddingItems.topPadding2x,
+          child: Column(
+            children: [
+              CustomTextField(
+                labelText: LocaleKeys.base_email.tr(),
+                inputType: TextInputType.emailAddress,
+              ),
+              CustomTextField(
+                labelText: LocaleKeys.base_password.tr(),
+                inputType: TextInputType.text,
+                isObscure: true,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      LocaleKeys.login_forgotPassword.tr(),
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            CustomElevatedButton(
-              buttonText: LocaleKeys.login_login.tr(),
-              buttonColor: Colors.amber,
-              textColor: Colors.black,
-            ),
-            CustomElevatedButton(
-              buttonText: LocaleKeys.login_doHaveAccount.tr(),
-              buttonColor: Colors.transparent,
-              textColor: Colors.white,
-            ),
-            Padding(
-              padding: PaddingItems.verticalPadding,
-              child: Text(LocaleKeys.login_or.tr()),
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_googleLogin.tr(args: [login]),
-              buttonIcon: Icons.g_mobiledata_outlined,
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_appleLogin.tr(args: [login]),
-              buttonIcon: Icons.apple_outlined,
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_facebookLogin.tr(args: [login]),
-              buttonIcon: Icons.facebook_outlined,
-            ),
-          ],
+                ],
+              ),
+              CustomElevatedButton(
+                buttonText: LocaleKeys.login_login.tr(),
+                buttonColor: Colors.amber,
+                textColor: Colors.black,
+              ),
+              CustomElevatedButton(
+                buttonText: LocaleKeys.login_doHaveAccount.tr(),
+                buttonColor: Colors.transparent,
+                textColor: Colors.white,
+              ),
+              Padding(
+                padding: PaddingItems.verticalPadding,
+                child: Text(LocaleKeys.login_or.tr()),
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_googleLogin.tr(args: [login]),
+                buttonIcon: Icons.g_mobiledata_outlined,
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_appleLogin.tr(args: [login]),
+                buttonIcon: Icons.apple_outlined,
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_facebookLogin.tr(args: [login]),
+                buttonIcon: Icons.facebook_outlined,
+              ),
+            ],
+          ),
         ),
       ),
     );

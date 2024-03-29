@@ -5,15 +5,16 @@ class TitleWidget extends StatelessWidget {
   const TitleWidget({
     required this.title,
     super.key,
+    this.padding = PaddingItems.bottomPadding,
   });
 
   final String title;
-
+  final EdgeInsets padding;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: PaddingItems.bottomPadding,
+      padding: padding,
       child: Text(
         title,
         style: Theme.of(context)

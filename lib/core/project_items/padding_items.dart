@@ -21,4 +21,7 @@ class PaddingItems {
   );
 
   static const EdgeInsets rightPadding = EdgeInsets.only(right: 15);
+  static const EdgeInsets zeroPadding = EdgeInsets.zero;
+  static const EdgeInsets allPadding = EdgeInsets.all(10);
+  static const EdgeInsets leftPadding = EdgeInsets.only(left: 15);
 }
