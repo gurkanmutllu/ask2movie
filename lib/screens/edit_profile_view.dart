@@ -13,12 +13,18 @@ class EditProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: const Icon(Icons.edit_note_outlined),
+        title: Padding(
+          padding: PaddingItems.topPadding,
+          child:
+              TitleWidget(title: LocaleKeys.editProfile_editProfileTitle.tr()),
+        ),
+      ),
       body: Padding(
         padding: PaddingItems.horizontalPadding,
         child: Column(
           children: [
-            TitleWidget(title: LocaleKeys.editProfile_editProfileTitle.tr()),
             CustomTextField(
               labelText: LocaleKeys.base_userName.tr(),
               inputType: TextInputType.text,

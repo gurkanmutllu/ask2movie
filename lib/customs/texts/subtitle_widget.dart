@@ -1,25 +1,28 @@
-import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:flutter/material.dart';
 
 class SubTitleWidget extends StatelessWidget {
-  const SubTitleWidget({required this.title, super.key});
+  const SubTitleWidget({
+    required this.title,
+    super.key,
+    this.textColor = Colors.white,
+    this.textFontWeight = FontWeight.w500,
+    this.textMaxline = 1,
+  });
 
   final String title;
+  final Color textColor;
+  final FontWeight textFontWeight;
+  final int textMaxline;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Container(
-        padding: PaddingItems.rightPadding,
-        child: Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall
-              ?.copyWith(color: Colors.white, fontWeight: FontWeight.w500),
-        ),
-      ),
+    return Text(
+      title,
+      overflow: TextOverflow.ellipsis,
+      maxLines: textMaxline,
+      style: Theme.of(context)
+          .textTheme
+          .headlineSmall
+          ?.copyWith(color: textColor, fontWeight: textFontWeight),
     );
   }
 }

@@ -14,47 +14,56 @@ class SignInView extends StatelessWidget {
     const signIn = 'Sign in';
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: const Icon(Icons.app_registration_outlined),
+        title: Padding(
+          padding: PaddingItems.topPadding,
+          child: TitleWidget(title: LocaleKeys.signIn_registerTitle.tr()),
+        ),
+      ),
       body: Padding(
         padding: PaddingItems.horizontalPadding,
-        child: Column(
-          children: [
-            TitleWidget(title: LocaleKeys.signIn_registerTitle.tr()),
-            CustomTextField(
-              labelText: LocaleKeys.base_userName.tr(),
-              inputType: TextInputType.text,
-            ),
-            CustomTextField(
-              labelText: LocaleKeys.base_email.tr(),
-              inputType: TextInputType.emailAddress,
-            ),
-            CustomTextField(
-              labelText: LocaleKeys.base_password.tr(),
-              inputType: TextInputType.text,
-            ),
-            CustomElevatedButton(
-              buttonText: LocaleKeys.signIn_signUp.tr(),
-              buttonColor: Colors.amber,
-              textColor: Colors.black,
-            ),
-            CustomElevatedButton(
-              buttonText: LocaleKeys.signIn_alreadyHaveAccount.tr(),
-              buttonColor: Colors.transparent,
-              textColor: Colors.white,
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_googleLogin.tr(args: [signIn]),
-              buttonIcon: Icons.g_mobiledata_outlined,
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_appleLogin.tr(args: [signIn]),
-              buttonIcon: Icons.apple_outlined,
-            ),
-            CustomElevatedButton.icon(
-              buttonText: LocaleKeys.base_facebookLogin.tr(args: [signIn]),
-              buttonIcon: Icons.facebook_outlined,
-            ),
-          ],
+        child: Padding(
+          padding: PaddingItems.topPadding2x,
+          child: Column(
+            children: [
+              CustomTextField(
+                labelText: LocaleKeys.base_userName.tr(),
+                inputType: TextInputType.text,
+              ),
+              CustomTextField(
+                labelText: LocaleKeys.base_email.tr(),
+                inputType: TextInputType.emailAddress,
+              ),
+              CustomTextField(
+                labelText: LocaleKeys.base_password.tr(),
+                inputType: TextInputType.text,
+                isObscure: true,
+              ),
+              CustomElevatedButton(
+                buttonText: LocaleKeys.signIn_signUp.tr(),
+                buttonColor: Colors.amber,
+                textColor: Colors.black,
+              ),
+              CustomElevatedButton(
+                buttonText: LocaleKeys.signIn_alreadyHaveAccount.tr(),
+                buttonColor: Colors.transparent,
+                textColor: Colors.white,
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_googleLogin.tr(args: [signIn]),
+                buttonIcon: Icons.g_mobiledata_outlined,
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_appleLogin.tr(args: [signIn]),
+                buttonIcon: Icons.apple_outlined,
+              ),
+              CustomElevatedButton.icon(
+                buttonText: LocaleKeys.base_facebookLogin.tr(args: [signIn]),
+                buttonIcon: Icons.facebook_outlined,
+              ),
+            ],
+          ),
         ),
       ),
     );
