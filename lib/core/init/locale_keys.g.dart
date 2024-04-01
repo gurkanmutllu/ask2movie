@@ -26,5 +26,7 @@ abstract class  LocaleKeys {
   static const home_homeTitle = 'home.homeTitle';
   static const home_latest = 'home.latest';
   static const home = 'home';
+  static const bookmarks_bookmarksTitle = 'bookmarks.bookmarksTitle';
+  static const bookmarks = 'bookmarks';
 
 }
