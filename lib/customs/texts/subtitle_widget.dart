@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SubTitleWidget extends StatelessWidget {
-  const SubTitleWidget({
+  const SubTitleWidget.m1({
+    required this.title,
+    super.key,
+  })  : textColor = Colors.white,
+        textFontWeight = FontWeight.w500,
+        textMaxline = 1;
+
+  const SubTitleWidget.m2({
     required this.title,
     super.key,
     this.textColor = Colors.white,
