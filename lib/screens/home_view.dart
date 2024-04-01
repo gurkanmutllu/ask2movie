@@ -25,12 +25,15 @@ class HomeView extends StatelessWidget {
             padding: PaddingItems.topPadding2x,
             sliver: SliverToBoxAdapter(
               child: SizedBox(
-                height: 230,
+                height: 300,
                 child: ListView.builder(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return const CustomTopFiveCard();
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: CustomTopFiveCard(),
+                    );
                   },
                 ),
               ),
