@@ -58,8 +58,8 @@ class _ImageWithIconButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Image.network(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-              fit: BoxFit.cover,
+              'https://m.media-amazon.com/images/M/MV5BNDkzYmNiOWYtNzZkNi00NzNiLTk2MzktY2VmMGY4MmI1NDMwXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg',
+              fit: BoxFit.fill,
             ),
           ),
         ),

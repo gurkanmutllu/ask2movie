@@ -29,5 +29,9 @@
     "home": {
         "homeTitle": "Top Five.",
         "latest": "Latest."
+    },
+    "bookmarks": {
+        "bookmarksTitle": "Bookmarks."
+
     }
 }

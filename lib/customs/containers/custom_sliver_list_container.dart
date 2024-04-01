@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,7 @@ class _MovieInfoColumn extends StatelessWidget {
       children: [
         SubTitleWidget.m2(
           title: "Hitman's Wife's BodyGuard",
+          textMaxline: 2,
         ),
         Row(
           children: [
@@ -54,10 +57,9 @@ class _MovieInfoColumn extends StatelessWidget {
         ),
         Text(
           'Action, Comedy, Crime',
-          textAlign: TextAlign.start,
         ),
         Text(
-          'Text about this movie.',
+          "The bodyguard, Michael Bryce, continues his friendship with assassin, Darius Kincaid, as they try to save Darius' wife Sonia.",
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),
@@ -80,7 +82,7 @@ class _PhotoWithIconButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             image: const DecorationImage(
               image: NetworkImage(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                'https://m.media-amazon.com/images/M/MV5BNDkzYmNiOWYtNzZkNi00NzNiLTk2MzktY2VmMGY4MmI1NDMwXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg',
               ),
               fit: BoxFit.cover,
             ),
