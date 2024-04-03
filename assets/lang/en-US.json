@@ -6,7 +6,11 @@
         "googleLogin": "{} with Google",
         "appleLogin": "{} with Apple ID",
         "facebookLogin": "{} with Facebook",
-        "seeMore": "See More"
+        "seeMore": "See More",
+        "home": "Home",
+        "settings": "Settings",
+        "search": "Search",
+        "bookmarks": "Bookmarks"
     },
     "login": {
         "loginTitle": "Login.",
@@ -17,7 +21,6 @@
     },
     "signIn": {
         "registerTitle": "Register.",
-        
         "signUp": "Sign Up!",
         "alreadyHaveAccount": "Already have an account? Log in!"
     },
@@ -32,6 +35,5 @@
     },
     "bookmarks": {
         "bookmarksTitle": "Bookmarks."
-
     }
 }
