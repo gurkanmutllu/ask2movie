@@ -21,7 +21,6 @@ class BookmarksView extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverList.builder(
-            itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
               return const CustomSliverListContainer();
             },
