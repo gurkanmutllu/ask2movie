@@ -8,6 +8,10 @@ abstract class  LocaleKeys {
   static const base_appleLogin = 'base.appleLogin';
   static const base_facebookLogin = 'base.facebookLogin';
   static const base_seeMore = 'base.seeMore';
+  static const base_home = 'base.home';
+  static const base_settings = 'base.settings';
+  static const base_search = 'base.search';
+  static const base_bookmarks = 'base.bookmarks';
   static const base = 'base';
   static const login_loginTitle = 'login.loginTitle';
   static const login_forgotPassword = 'login.forgotPassword';

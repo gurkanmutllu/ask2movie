@@ -1,5 +1,5 @@
 import 'package:ask2movie/core/device/constants.dart';
-import 'package:ask2movie/screens/bookmarks_view.dart';
+import 'package:ask2movie/screens/bottom_navbar_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
       ),
-      home: const BookmarksView(),
+      home: const BottomNavigationBarExample(),
     );
   }
 }
