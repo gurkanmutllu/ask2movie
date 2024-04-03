@@ -2,7 +2,9 @@
 
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
+import 'package:ask2movie/models/movie_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomSliverListContainer extends StatelessWidget {
   const CustomSliverListContainer({
@@ -19,7 +21,7 @@ class CustomSliverListContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: _PhotoWithIconButton(),
+              child: _ImageWithIconButton(),
             ),
             Expanded(
               child: Padding(
@@ -39,27 +41,33 @@ class _MovieInfoColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    final movies = Movie.fetchAll();
+    final movie = movies.first;
+
+    return Column(
       children: [
         SubTitleWidget.m2(
-          title: "Hitman's Wife's BodyGuard",
+          title: movie.name,
           textMaxline: 2,
         ),
         Row(
           children: [
-            SubTitleWidget.m1(title: '3.5 '),
-            Icon(Icons.star),
-            Icon(Icons.star),
-            Icon(Icons.star),
-            Icon(Icons.star_half_outlined),
-            Icon(Icons.star_border_outlined),
+            SubTitleWidget.m1(title: movie.rate.toString()),
+            RatingBarIndicator(
+              rating: movie.rate,
+              itemBuilder: (context, index) => const Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              itemSize: 25,
+            ),
           ],
         ),
-        Text(
+        const Text(
           'Action, Comedy, Crime',
         ),
         Text(
-          "The bodyguard, Michael Bryce, continues his friendship with assassin, Darius Kincaid, as they try to save Darius' wife Sonia.",
+          movie.description,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),
@@ -68,11 +76,13 @@ class _MovieInfoColumn extends StatelessWidget {
   }
 }
 
-class _PhotoWithIconButton extends StatelessWidget {
-  const _PhotoWithIconButton();
+class _ImageWithIconButton extends StatelessWidget {
+  const _ImageWithIconButton();
 
   @override
   Widget build(BuildContext context) {
+    final movies = Movie.fetchAll();
+    final movie = movies.first;
     return Stack(
       alignment: Alignment.topRight,
       children: [
@@ -80,9 +90,9 @@ class _PhotoWithIconButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.circular(20),
-            image: const DecorationImage(
+            image: DecorationImage(
               image: NetworkImage(
-                'https://m.media-amazon.com/images/M/MV5BNDkzYmNiOWYtNzZkNi00NzNiLTk2MzktY2VmMGY4MmI1NDMwXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg',
+                movie.imagUrl,
               ),
               fit: BoxFit.cover,
             ),

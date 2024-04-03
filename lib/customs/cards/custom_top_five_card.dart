@@ -1,37 +1,42 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomTopFiveCard extends StatelessWidget {
   const CustomTopFiveCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const rating = 3.5;
     return GestureDetector(
       onTap: () {},
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 230,
             child: _ImageWithIconButton(),
           ),
-          SubTitleWidget.m1(
+          const SubTitleWidget.m1(
             title: 'Trying..............',
           ),
           Padding(
             padding: PaddingItems.horizontalPadding,
             child: Row(
               children: [
-                SubTitleWidget.m1(
-                  title: '3.5 ',
+                const SubTitleWidget.m1(
+                  title: '$rating ',
                 ),
-                Icon(Icons.star),
-                Icon(Icons.star),
-                Icon(Icons.star),
-                Icon(Icons.star_half_outlined),
-                Icon(Icons.star_border_outlined),
+                RatingBarIndicator(
+                  rating: rating,
+                  itemBuilder: (context, index) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  itemSize: 25,
+                ),
               ],
             ),
           ),
