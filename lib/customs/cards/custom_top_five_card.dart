@@ -1,4 +1,3 @@
-import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -20,25 +19,22 @@ class CustomTopFiveCard extends StatelessWidget {
             child: _ImageWithIconButton(),
           ),
           const SubTitleWidget.m1(
-            title: 'Trying..............',
+            title: 'Hitman',
           ),
-          Padding(
-            padding: PaddingItems.horizontalPadding,
-            child: Row(
-              children: [
-                const SubTitleWidget.m1(
-                  title: '$rating ',
+          Row(
+            children: [
+              const SubTitleWidget.m1(
+                title: '$rating ',
+              ),
+              RatingBarIndicator(
+                rating: rating,
+                itemBuilder: (context, index) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
-                RatingBarIndicator(
-                  rating: rating,
-                  itemBuilder: (context, index) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemSize: 25,
-                ),
-              ],
-            ),
+                itemSize: 25,
+              ),
+            ],
           ),
         ],
       ),

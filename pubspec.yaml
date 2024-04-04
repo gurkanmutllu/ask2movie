@@ -38,6 +38,7 @@ dependencies:
   easy_localization: ^3.0.5
   kartal: 3.5.0
   flutter_rating_bar: ^4.0.1
+  readmore: ^3.0.0
 
 dev_dependencies:
   flutter_test:
