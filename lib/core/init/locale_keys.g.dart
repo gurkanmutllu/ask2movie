@@ -12,6 +12,7 @@ abstract class  LocaleKeys {
   static const base_settings = 'base.settings';
   static const base_search = 'base.search';
   static const base_bookmarks = 'base.bookmarks';
+  static const base_more = 'base.more';
   static const base = 'base';
   static const login_loginTitle = 'login.loginTitle';
   static const login_forgotPassword = 'login.forgotPassword';
@@ -32,5 +33,14 @@ abstract class  LocaleKeys {
   static const home = 'home';
   static const bookmarks_bookmarksTitle = 'bookmarks.bookmarksTitle';
   static const bookmarks = 'bookmarks';
+  static const settings_settingsTitle = 'settings.settingsTitle';
+  static const settings_accountSettings = 'settings.accountSettings';
+  static const settings_editProfile = 'settings.editProfile';
+  static const settings_changeLanguage = 'settings.changeLanguage';
+  static const settings_logOut = 'settings.logOut';
+  static const settings_aboutUs = 'settings.aboutUs';
+  static const settings_privacyPolicy = 'settings.privacyPolicy';
+  static const settings_terms = 'settings.terms';
+  static const settings = 'settings';
 
 }

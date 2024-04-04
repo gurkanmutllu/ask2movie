@@ -10,7 +10,8 @@
         "home": "Home",
         "settings": "Settings",
         "search": "Search",
-        "bookmarks": "Bookmarks"
+        "bookmarks": "Bookmarks",
+        "more": "More"
     },
     "login": {
         "loginTitle": "Login.",
@@ -35,5 +36,15 @@
     },
     "bookmarks": {
         "bookmarksTitle": "Bookmarks."
+    },
+    "settings": {
+        "settingsTitle": "Settings.",
+        "accountSettings": "Account Settings",
+        "editProfile": "Edit Profile",
+        "changeLanguage": "Change Language",
+        "logOut": "Log Out",
+        "aboutUs": "About Us",
+        "privacyPolicy": "Privacy Policy",
+        "terms": "Terms and Conditions"
     }
 }

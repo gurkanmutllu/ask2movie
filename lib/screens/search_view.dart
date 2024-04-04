@@ -11,9 +11,12 @@ class SearchView extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         color: Colors.yellowAccent,
-        child: const Text(
+        child: Text(
           'Search',
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(color: Colors.black, fontWeight: FontWeight.w800),
         ),
       ),
     );

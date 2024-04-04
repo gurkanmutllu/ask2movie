@@ -57,7 +57,7 @@ class _ImageWithIconButton extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            width: 250,
+            width: 200,
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(20),
