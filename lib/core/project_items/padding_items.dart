@@ -16,6 +16,9 @@ class PaddingItems {
   static const EdgeInsets topPadding = EdgeInsets.only(
     top: 30,
   );
+  static const EdgeInsets halfTopPadding = EdgeInsets.only(
+    top: 15,
+  );
   static const EdgeInsets topPadding2x = EdgeInsets.only(
     top: 30,
   );
