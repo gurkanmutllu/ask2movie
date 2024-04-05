@@ -1,33 +1,33 @@
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
+import 'package:ask2movie/models/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomTopFiveCard extends StatelessWidget {
-  const CustomTopFiveCard({super.key});
-
+  const CustomTopFiveCard({required this.movie, super.key});
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
-    const rating = 3.5;
     return GestureDetector(
       onTap: () {},
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 230,
-            child: _ImageWithIconButton(),
+            child: _ImageWithIconButton(movie),
           ),
-          const SubTitleWidget.m1(
-            title: 'Hitman',
+          SubTitleWidget.m1(
+            title: movie.name,
           ),
           Row(
             children: [
-              const SubTitleWidget.m1(
-                title: '$rating ',
+              SubTitleWidget.m1(
+                title: movie.rate.toString(),
               ),
               RatingBarIndicator(
-                rating: rating,
+                rating: movie.rate,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
@@ -43,8 +43,9 @@ class CustomTopFiveCard extends StatelessWidget {
 }
 
 class _ImageWithIconButton extends StatelessWidget {
-  const _ImageWithIconButton();
+  const _ImageWithIconButton(this.movie);
 
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -53,14 +54,14 @@ class _ImageWithIconButton extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            width: 200,
+            width: 300,
             decoration: BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Image.network(
-              'https://m.media-amazon.com/images/M/MV5BNDkzYmNiOWYtNzZkNi00NzNiLTk2MzktY2VmMGY4MmI1NDMwXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg',
-              fit: BoxFit.fill,
+              movie.imagUrl,
+              fit: BoxFit.cover,
             ),
           ),
         ),

@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieInfoColumn extends StatelessWidget {
-  const MovieInfoColumn({super.key});
+  const MovieInfoColumn({required this.movie, super.key});
 
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
-    final movies = Movie.fetchAll();
-    final movie = movies.first;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

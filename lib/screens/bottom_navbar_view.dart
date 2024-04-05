@@ -1,4 +1,5 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
+import 'package:ask2movie/models/movie_model.dart';
 import 'package:ask2movie/screens/bookmarks_view.dart';
 import 'package:ask2movie/screens/home_view.dart';
 import 'package:ask2movie/screens/movie_detail_view.dart';
@@ -15,13 +16,20 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeView(),
-    SettingsView(),
-    // SearchView(),
-    MovieDetailView(),
-    BookmarksView(),
-  ];
+  late List<Widget> _widgetOptions;
+  @override
+  void initState() {
+    super.initState();
+    final movies = Movie.fetchAll();
+    final movie = movies.first;
+
+    _widgetOptions = <Widget>[
+      HomeView(movie: movie),
+      const SettingsView(),
+      MovieDetailView(movie: movie),
+      BookmarksView(movie: movie),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
