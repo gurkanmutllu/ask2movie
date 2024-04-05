@@ -6,13 +6,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 
 class MovieDetailView extends StatelessWidget {
-  const MovieDetailView({super.key});
-
+  const MovieDetailView({required this.movie, super.key});
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
-    final movies = Movie.fetchAll();
-    final movie = movies.first;
-
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -56,9 +53,9 @@ class MovieDetailView extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
+            Padding(
               padding: PaddingItems.movieInfoColumnDetailViewPadding,
-              child: _MovieInfoColumnDetailView(),
+              child: _MovieInfoColumnDetailView(movie),
             ),
           ],
         ),
@@ -68,13 +65,12 @@ class MovieDetailView extends StatelessWidget {
 }
 
 class _MovieInfoColumnDetailView extends StatelessWidget {
-  const _MovieInfoColumnDetailView();
+  const _MovieInfoColumnDetailView(this.movie);
+
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
-    final movies = Movie.fetchAll();
-    final movie = movies.first;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

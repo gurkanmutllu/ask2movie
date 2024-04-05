@@ -7,25 +7,29 @@ import 'package:flutter/material.dart';
 
 class CustomSliverListContainer extends StatelessWidget {
   const CustomSliverListContainer({
+    required this.movie,
     super.key,
   });
 
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: PaddingItems.allPadding,
       child: GestureDetector(
         onTap: () {},
-        child: const Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: _ImageWithIconButton(),
+              child: _ImageWithIconButton(movie),
             ),
             Expanded(
               child: Padding(
                 padding: PaddingItems.leftPadding,
-                child: MovieInfoColumn(),
+                child: MovieInfoColumn(
+                  movie: movie,
+                ),
               ),
             ),
           ],
@@ -36,12 +40,11 @@ class CustomSliverListContainer extends StatelessWidget {
 }
 
 class _ImageWithIconButton extends StatelessWidget {
-  const _ImageWithIconButton();
+  const _ImageWithIconButton(this.movie);
 
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
-    final movies = Movie.fetchAll();
-    final movie = movies.first;
     return Stack(
       alignment: Alignment.topRight,
       children: [

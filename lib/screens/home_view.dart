@@ -3,12 +3,13 @@ import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/cards/custom_top_five_card.dart';
 import 'package:ask2movie/customs/containers/custom_sliver_list_container.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
+import 'package:ask2movie/models/movie_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
+  const HomeView({required this.movie, super.key});
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +31,12 @@ class HomeView extends StatelessWidget {
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: CustomTopFiveCard(),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: SizedBox(
+                        width: 300,
+                        child: CustomTopFiveCard(movie: movie),
+                      ),
                     );
                   },
                 ),
@@ -51,7 +55,9 @@ class HomeView extends StatelessWidget {
           SliverList.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
-              return const CustomSliverListContainer();
+              return CustomSliverListContainer(
+                movie: movie,
+              );
             },
           ),
         ],
