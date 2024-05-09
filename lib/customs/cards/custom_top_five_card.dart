@@ -1,5 +1,6 @@
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -8,7 +9,7 @@ class CustomTopFiveCard extends StatelessWidget {
   final Movie movie;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {},
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -59,8 +60,10 @@ class _ImageWithIconButton extends StatelessWidget {
               color: Colors.black,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.network(
-              movie.imagUrl,
+            child: CachedNetworkImage(
+              imageUrl: movie.imagUrl,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
             ),
           ),

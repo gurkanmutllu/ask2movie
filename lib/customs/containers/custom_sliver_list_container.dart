@@ -3,6 +3,7 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/cards/movie_info_column.dart';
 import 'package:ask2movie/models/movie_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomSliverListContainer extends StatelessWidget {
@@ -16,7 +17,7 @@ class CustomSliverListContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: PaddingItems.allPadding,
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {},
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,18 +49,20 @@ class _ImageWithIconButton extends StatelessWidget {
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: NetworkImage(
-                movie.imagUrl,
+        CachedNetworkImage(
+          imageUrl: movie.imagUrl,
+          imageBuilder: (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
             ),
+            height: 300,
           ),
-          height: 300,
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         IconButton(
           color: Colors.amber,
