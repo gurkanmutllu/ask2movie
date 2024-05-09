@@ -1,6 +1,7 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
@@ -29,26 +30,27 @@ class MovieDetailView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Container(
-              height: 600,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    movie.imagUrl,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
+            CachedNetworkImage(
+              imageUrl: movie.imagUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                height: 600,
+                width: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(1),
-                    ],
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withOpacity(1),
+                      ],
+                    ),
                   ),
                 ),
               ),
