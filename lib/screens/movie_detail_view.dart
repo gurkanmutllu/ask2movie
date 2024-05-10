@@ -31,7 +31,7 @@ class MovieDetailView extends StatelessWidget {
         child: Stack(
           children: [
             CachedNetworkImage(
-              imageUrl: movie.imagUrl,
+              imageUrl: movie.imageUrl ?? '',
               imageBuilder: (context, imageProvider) => Container(
                 height: 600,
                 width: double.infinity,
@@ -77,7 +77,7 @@ class _MovieInfoColumnDetailView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SubTitleWidget.m2(
-          title: movie.name,
+          title: movie.name ?? '',
           textMaxline: 2,
         ),
         Padding(
@@ -86,7 +86,7 @@ class _MovieInfoColumnDetailView extends StatelessWidget {
             children: [
               SubTitleWidget.m1(title: movie.rate.toString()),
               RatingBarIndicator(
-                rating: movie.rate,
+                rating: movie.rate ?? 0,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
@@ -97,13 +97,13 @@ class _MovieInfoColumnDetailView extends StatelessWidget {
           ),
         ),
         Text(
-          movie.genre,
+          movie.genre ?? '',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         Padding(
           padding: PaddingItems.verticalPadding,
           child: ReadMoreText(
-            movie.description * 5,
+            movie.description ?? '' * 5,
             colorClickableText: Colors.amber,
           ),
         ),

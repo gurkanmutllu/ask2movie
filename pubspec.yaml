@@ -40,13 +40,19 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   readmore: ^3.0.0
   cached_network_image: ^3.3.1
-  hive: ^4.0.0-dev.2
-  isar_flutter_libs: ^4.0.0-dev.13
-  path_provider: ^2.1.0
+  
+  json_annotation: ^4.9.0
+
+  #Modules 
+  core:
+    path: module/core
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.9
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
