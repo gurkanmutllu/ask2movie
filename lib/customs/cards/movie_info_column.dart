@@ -13,14 +13,14 @@ class MovieInfoColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SubTitleWidget.m2(
-          title: movie.name,
+          title: movie.name ?? '',
           textMaxline: 2,
         ),
         Row(
           children: [
             SubTitleWidget.m1(title: movie.rate.toString()),
             RatingBarIndicator(
-              rating: movie.rate,
+              rating: movie.rate ?? 0,
               itemBuilder: (context, index) => const Icon(
                 Icons.star,
                 color: Colors.amber,
@@ -30,11 +30,11 @@ class MovieInfoColumn extends StatelessWidget {
           ],
         ),
         Text(
-          movie.genre,
+          movie.genre ?? '',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         Text(
-          movie.description * 5,
+          movie.description ?? '',
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),

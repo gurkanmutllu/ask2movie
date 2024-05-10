@@ -50,7 +50,7 @@ class _ImageWithIconButton extends StatelessWidget {
       alignment: Alignment.topRight,
       children: [
         CachedNetworkImage(
-          imageUrl: movie.imagUrl,
+          imageUrl: movie.imageUrl ?? '',
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

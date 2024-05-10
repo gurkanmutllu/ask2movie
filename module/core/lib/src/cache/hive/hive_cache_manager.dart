@@ -1,9 +1,12 @@
-import 'package:ask2movie/src/cache/cache_manager.dart';
-import 'package:ask2movie/src/cache/cache_model.dart';
+import 'package:core/src/cache/core/cache_manager.dart';
+import 'package:core/src/cache/core/cache_model.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// The HiveCacheManager class is an implementation of the CacheManager class.
 final class HiveCacheManager extends CacheManager {
+  /// [path] is the path to the directory
+  ///  where the Hive database files are stored.
   HiveCacheManager({super.path});
 
   @override

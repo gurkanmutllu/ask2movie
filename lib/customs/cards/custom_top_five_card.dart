@@ -20,7 +20,7 @@ class CustomTopFiveCard extends StatelessWidget {
             child: _ImageWithIconButton(movie),
           ),
           SubTitleWidget.m1(
-            title: movie.name,
+            title: movie.name ?? '',
           ),
           Row(
             children: [
@@ -28,7 +28,7 @@ class CustomTopFiveCard extends StatelessWidget {
                 title: movie.rate.toString(),
               ),
               RatingBarIndicator(
-                rating: movie.rate,
+                rating: movie.rate ?? 0,
                 itemBuilder: (context, index) => const Icon(
                   Icons.star,
                   color: Colors.amber,
@@ -61,7 +61,7 @@ class _ImageWithIconButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: CachedNetworkImage(
-              imageUrl: movie.imagUrl,
+              imageUrl: movie.imageUrl ?? '',
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
