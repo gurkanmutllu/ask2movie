@@ -9,7 +9,7 @@ class MovieService {
     return Movie(
       id: 1,
       name: "Hitman's wife's Bodyguard",
-      rate: 3.5,
+      rate: 5,
       imageUrl:
           'https://m.media-amazon.com/images/M/MV5BNDkzYmNiOWYtNzZkNi00NzNiLTk2MzktY2VmMGY4MmI1NDMwXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_.jpg',
       genre: 'Action, Comedy, Crime',

@@ -1,16 +1,26 @@
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
+import 'package:ask2movie/screens/movie_detail_view.dart';
+import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class CustomTopFiveCard extends StatelessWidget {
+class CustomTopFiveCard extends StatelessWidget
+    with NavigationWrapperMixinStateless {
   const CustomTopFiveCard({required this.movie, super.key});
   final Movie movie;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        pushTo(
+          context,
+          MovieDetailView(
+            movie: movie,
+          ),
+        );
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

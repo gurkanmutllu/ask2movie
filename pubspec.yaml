@@ -40,12 +40,21 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   readmore: ^3.0.0
   cached_network_image: ^3.3.1
-  
   json_annotation: ^4.9.0
 
   #Modules 
   core:
     path: module/core
+
+  #Firebase
+  firebase_core: ^2.31.0
+  firebase_auth: ^4.19.5
+  cloud_firestore: ^4.17.3
+  
+  crypto: ^3.0.3
+  equatable: ^2.0.5
+  riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +85,7 @@ flutter:
   assets:
     - assets/lang/
     - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

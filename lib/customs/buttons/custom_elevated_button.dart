@@ -8,6 +8,7 @@ final class CustomElevatedButton extends StatelessWidget {
     required this.buttonText,
     required this.buttonColor,
     required this.textColor,
+    required this.onPressed,
     super.key,
   })  : _type = ButtonType.nonIcon,
         buttonIcon = null;
@@ -15,6 +16,7 @@ final class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton.icon({
     required this.buttonText,
     required this.buttonIcon,
+    required this.onPressed,
     this.buttonColor = Colors.black,
     this.textColor = Colors.white,
     super.key,
@@ -25,6 +27,7 @@ final class CustomElevatedButton extends StatelessWidget {
   final String buttonText;
   final Color buttonColor;
   final Color textColor;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ final class CustomElevatedButton extends StatelessWidget {
       child: switch (_type) {
         ButtonType.icon => ElevatedButton.icon(
             label: Text(buttonText),
-            onPressed: () {},
+            onPressed: onPressed,
             icon: Icon(buttonIcon),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
@@ -42,7 +45,7 @@ final class CustomElevatedButton extends StatelessWidget {
             ),
           ),
         ButtonType.nonIcon => ElevatedButton(
-            onPressed: () {},
+            onPressed: onPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: buttonColor,
               shape: BorderItems.roundedRectangleBorderSide,

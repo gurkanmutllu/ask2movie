@@ -1,7 +1,7 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
-import 'package:ask2movie/screens/bookmarks_view.dart';
 import 'package:ask2movie/screens/home_view.dart';
 import 'package:ask2movie/screens/movie_detail_view.dart';
+import 'package:ask2movie/screens/search_view.dart';
 import 'package:ask2movie/screens/settings_view.dart';
 import 'package:ask2movie/services/movie_service.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       HomeView(movie: movieService.fetch()),
       const SettingsView(),
       MovieDetailView(movie: movieService.fetch()),
-      BookmarksView(movie: movieService.fetch()),
+      const SearchView(),
     ];
   }
 

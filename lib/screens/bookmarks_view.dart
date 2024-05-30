@@ -13,7 +13,6 @@ class BookmarksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left_outlined),
         title: Padding(
           padding: PaddingItems.topPadding,
           child: TitleWidget(title: LocaleKeys.bookmarks_bookmarksTitle.tr()),

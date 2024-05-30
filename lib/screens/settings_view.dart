@@ -1,18 +1,37 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/buttons/custom_text_button.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
+import 'package:ask2movie/models/user_model.dart';
+import 'package:ask2movie/screens/login_view.dart';
+import 'package:ask2movie/screens/mixins/settings_view_mixin.dart';
+import 'package:ask2movie/screens/update_profile_view.dart';
+import 'package:ask2movie/services/auth_service.dart';
+import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
+
+  @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView>
+    with NavigationWrapperMixin, SettingsViewMixin {
+  late final AuthService _authService;
+  @override
+  void initState() {
+    super.initState();
+    _authService = AuthService.instance;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left_outlined),
         title: Padding(
           padding: PaddingItems.topPadding,
           child: TitleWidget(title: LocaleKeys.settings_settingsTitle.tr()),
@@ -25,40 +44,51 @@ class SettingsView extends StatelessWidget {
           children: [
             Column(
               children: [
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.white,
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://ps.w.org/simple-user-avatar/assets/icon-256x256.png?rev=2413146',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      height: 50,
-                      width: 50,
-                    ),
-                    const Padding(
-                      padding: PaddingItems.horizontalPadding,
-                      child: Text('User Name'),
-                    ),
-                  ],
+                FutureBuilder(
+                  future: getCurrentUser(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        return const Placeholder();
+                      case ConnectionState.waiting:
+                      case ConnectionState.active:
+                        return const LinearProgressIndicator();
+                      case ConnectionState.done:
+                        if (snapshot.hasData) {
+                          final user = snapshot.data;
+                          return _UserInfoRow(
+                            user: user!,
+                          );
+                        } else {
+                          return const SizedBox(
+                            child: Center(
+                              child: Text('no user logged in.'),
+                            ),
+                          );
+                        }
+                    }
+                  },
                 ),
                 SubTitleWidget.m2(
                   title: LocaleKeys.settings_accountSettings.tr(),
                   textColor: Colors.grey,
                 ),
-                _CustomSettingsTextButton(
+                CustomTextButton.m1(
                   title: LocaleKeys.settings_editProfile.tr(),
+                  onPressed: () {
+                    pushTo(const UpdateProfileView());
+                  },
                 ),
-                _CustomSettingsTextButton(
+                CustomTextButton.m1(
                   title: LocaleKeys.settings_changeLanguage.tr(),
+                  onPressed: () {},
                 ),
-                _CustomSettingsTextButton(
+                CustomTextButton.m1(
                   title: LocaleKeys.settings_logOut.tr(),
+                  onPressed: () {
+                    _authService.signOut();
+                    pushReplaceAll(const LoginView());
+                  },
                 ),
               ],
             ),
@@ -73,14 +103,17 @@ class SettingsView extends StatelessWidget {
                         .bodyLarge
                         ?.copyWith(color: Colors.grey),
                   ),
-                  _CustomSettingsTextButton(
+                  CustomTextButton.m1(
                     title: LocaleKeys.settings_aboutUs.tr(),
+                    onPressed: () {},
                   ),
-                  _CustomSettingsTextButton(
+                  CustomTextButton.m1(
                     title: LocaleKeys.settings_privacyPolicy.tr(),
+                    onPressed: () {},
                   ),
-                  _CustomSettingsTextButton(
+                  CustomTextButton.m1(
                     title: LocaleKeys.settings_terms.tr(),
+                    onPressed: () {},
                   ),
                 ],
               ),
@@ -92,32 +125,35 @@ class SettingsView extends StatelessWidget {
   }
 }
 
-class _CustomSettingsTextButton extends StatelessWidget {
-  const _CustomSettingsTextButton({
-    required this.title,
+class _UserInfoRow extends StatelessWidget {
+  const _UserInfoRow({
+    required this.user,
   });
+  final User user;
 
-  final String title;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: PaddingItems.halfTopPadding,
-      child: TextButton(
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(color: Colors.white),
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Colors.white,
+            image: DecorationImage(
+              image: NetworkImage(
+                user.profilePhotoUrl ?? '',
+              ),
+              fit: BoxFit.cover,
             ),
-            const Icon(
-              Icons.chevron_right_outlined,
-              color: Colors.white,
-            ),
-          ],
+          ),
+          height: 50,
+          width: 50,
         ),
-      ),
+        Padding(
+          padding: PaddingItems.horizontalPadding,
+          child: Text(user.userName ?? ''),
+        ),
+      ],
     );
   }
 }

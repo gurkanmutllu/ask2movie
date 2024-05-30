@@ -14,7 +14,6 @@ class MovieDetailView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        leading: const Icon(Icons.chevron_left_outlined),
         actions: [
           IconButton(
             onPressed: () {},

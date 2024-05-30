@@ -11,7 +11,8 @@
         "settings": "Settings",
         "search": "Search",
         "bookmarks": "Bookmarks",
-        "more": "More"
+        "more": "More",
+        "couldNotEmpty": "This area could not be empty."
     },
     "login": {
         "loginTitle": "Login.",
