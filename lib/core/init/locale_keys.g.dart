@@ -13,6 +13,7 @@ abstract class  LocaleKeys {
   static const base_search = 'base.search';
   static const base_bookmarks = 'base.bookmarks';
   static const base_more = 'base.more';
+  static const base_couldNotEmpty = 'base.couldNotEmpty';
   static const base = 'base';
   static const login_loginTitle = 'login.loginTitle';
   static const login_forgotPassword = 'login.forgotPassword';

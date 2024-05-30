@@ -1,12 +1,12 @@
 import 'package:ask2movie/core/device/constants.dart';
-import 'package:ask2movie/screens/bottom_navbar_view.dart';
+import 'package:ask2movie/initialize/application_start.dart';
+import 'package:ask2movie/screens/wrapper_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-
+  await ApplicationStart.init();
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(
     EasyLocalization(
       supportedLocales: [Locales.en.locale],
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         useMaterial3: true,
       ),
-      home: const BottomNavBar(),
+      home: const WrapperView(),
     );
   }
 }

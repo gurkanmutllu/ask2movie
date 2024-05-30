@@ -25,15 +25,15 @@ class EditProfileView extends StatelessWidget {
         padding: PaddingItems.horizontalPadding,
         child: Column(
           children: [
-            CustomTextField(
+            CustomTextFormField(
               labelText: LocaleKeys.base_userName.tr(),
               inputType: TextInputType.text,
             ),
-            CustomTextField(
+            CustomTextFormField(
               labelText: LocaleKeys.base_email.tr(),
               inputType: TextInputType.emailAddress,
             ),
-            CustomTextField(
+            CustomTextFormField(
               labelText: LocaleKeys.base_password.tr(),
               inputType: TextInputType.text,
             ),
@@ -41,6 +41,7 @@ class EditProfileView extends StatelessWidget {
             Padding(
               padding: PaddingItems.topPadding,
               child: CustomElevatedButton(
+                onPressed: () {},
                 buttonText: LocaleKeys.editProfile_saveChanges.tr(),
                 buttonColor: Colors.amber,
                 textColor: Colors.black,

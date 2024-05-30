@@ -3,10 +3,13 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/cards/movie_info_column.dart';
 import 'package:ask2movie/models/movie_model.dart';
+import 'package:ask2movie/screens/movie_detail_view.dart';
+import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class CustomSliverListContainer extends StatelessWidget {
+class CustomSliverListContainer extends StatelessWidget
+    with NavigationWrapperMixinStateless {
   const CustomSliverListContainer({
     required this.movie,
     super.key,
@@ -18,7 +21,9 @@ class CustomSliverListContainer extends StatelessWidget {
     return Padding(
       padding: PaddingItems.allPadding,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          pushTo(context, MovieDetailView(movie: movie));
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

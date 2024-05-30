@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1029458190354",
+    "project_id": "ask2movie-46970",
+    "storage_bucket": "ask2movie-46970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029458190354:android:459a2dafde8254990038cb",
+        "android_client_info": {
+          "package_name": "com.example.ask2movie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqRXyn0m33z19ZtrboTiDJ1caJLo-887Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
