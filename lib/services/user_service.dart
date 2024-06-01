@@ -2,17 +2,16 @@ import 'dart:developer';
 
 import 'package:ask2movie/models/user_model.dart';
 import 'package:ask2movie/providers/fire_store_provider.dart';
-import 'package:ask2movie/services/password_service.dart';
+import 'package:ask2movie/services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth_user;
 
 class UserService {
   UserService._init();
   static final UserService _instance = UserService._init();
   static UserService get instance => _instance;
 
-  final _passwordService = PasswordService.instance;
   final _fireStoreProvider = FireStoreProvider.instance;
+  final _authService = AuthService.instance;
 
   CollectionReference get users =>
       FirebaseFirestore.instance.collection('users');
@@ -33,23 +32,19 @@ class UserService {
     }
   }
 
-  Future<void> addUser(User user, auth_user.UserCredential result) async {
+  Future<void> addUser(String userId, User user) async {
+    final path = 'users/$userId';
     final emailQuery =
         await users.where('emailAddress', isEqualTo: user.emailAddress).get();
-
     if (emailQuery.docs.isEmpty) {
-      await users.doc(result.user?.uid).set({
-        'userName': user.userName,
-        'emailAddress': user.emailAddress,
-        'password': _passwordService.encryptPassword(user.password ?? ''),
-        'profilePhotoUrl': user.profilePhotoUrl,
-        'id': result.user!.uid,
-      });
+      _fireStoreProvider.add(path: path, model: user);
     }
   }
 
   Future<void> updateUser(String userId, User user) async {
-    _fireStoreProvider.update(path: userId, model: user);
+    final path = 'users/$userId';
+    _fireStoreProvider.update(path: path, model: user);
+    await _authService.updateUser(userId: userId, user: user);
   }
 
   Future<bool> checkUserInfo(String userName) async {

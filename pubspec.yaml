@@ -55,6 +55,8 @@ dependencies:
   equatable: ^2.0.5
   riverpod: ^2.5.1
   flutter_riverpod: ^2.5.1
+  shimmer: ^3.0.0
+  image_picker: ^1.1.0
 
 dev_dependencies:
   flutter_test:

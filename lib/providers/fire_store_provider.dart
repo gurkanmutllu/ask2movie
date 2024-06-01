@@ -7,10 +7,23 @@ class FireStoreProvider {
   static FireStoreProvider get instance => _instancee;
   final _instance = FirebaseFirestore.instance;
 
+  void add<T extends IdModel>({
+    required String path,
+    required BaseFirebaseModel<T> model,
+  }) {
+    _instance.doc(path).set(model.toJson());
+  }
+
   void update<T extends IdModel>({
     required String path,
     required BaseFirebaseModel<T> model,
   }) {
     _instance.doc(path).update(model.toJson());
+  }
+
+  void get<T extends IdModel>({
+    required String path,
+  }) {
+    _instance.doc(path).get();
   }
 }

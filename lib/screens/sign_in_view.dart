@@ -87,6 +87,12 @@ class _SignInViewState extends State<SignInView>
                   isObscure: true,
                 ),
                 CustomElevatedButton(
+                  buttonText: 'buttonText',
+                  buttonColor: Colors.white,
+                  textColor: Colors.black,
+                  onPressed: () {},
+                ),
+                CustomElevatedButton(
                   buttonText: LocaleKeys.signIn_signUp.tr(),
                   buttonColor: Colors.amber,
                   textColor: Colors.black,
@@ -95,7 +101,8 @@ class _SignInViewState extends State<SignInView>
                       userName: _userNameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,
-                      profilePhotoUrl: '',
+                      profilePhotoUrl:
+                          'https://lh3.googleusercontent.com/a/ACg8ocKz40YKH7dFCzkjcQiZS2MS7G3iyz00NNF-4e3lpEBL3r8T8oQ=s288-c-no',
                       key: _key,
                     );
                     if (isSuccess) {
@@ -113,7 +120,7 @@ class _SignInViewState extends State<SignInView>
                   onPressed: () {
                     // pushTo(const LoginView());
                     pop(context);
-                    Future<void>.delayed(const Duration(seconds: 3))
+                    Future<void>.delayed(const Duration(seconds: 1))
                         .then((value) {
                       log('object');
                       setState(() {});

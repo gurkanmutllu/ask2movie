@@ -8,8 +8,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({required this.movie, super.key});
-  final Movie movie;
+  const HomeView({this.movie, super.key});
+  final Movie? movie;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: SizedBox(
                         width: 300,
-                        child: CustomTopFiveCard(movie: movie),
+                        child: CustomTopFiveCard(movie: movie ?? Movie()),
                       ),
                     );
                   },
@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
               return CustomSliverListContainer(
-                movie: movie,
+                movie: movie ?? Movie(),
               );
             },
           ),

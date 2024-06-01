@@ -33,12 +33,6 @@ mixin SignInViewMixin<T extends StatefulWidget> on State<T> {
     required String profilePhotoUrl,
     required GlobalKey<FormState> key,
   }) async {
-    final user = User(
-      userName: userName,
-      emailAddress: email,
-      password: password,
-      profilePhotoUrl: profilePhotoUrl,
-    );
     if (!(key.currentState?.validate() ?? false)) {
       return false;
     }
@@ -49,7 +43,16 @@ mixin SignInViewMixin<T extends StatefulWidget> on State<T> {
         password: password,
       );
       if (result != null) {
-        await _userService.addUser(user, result);
+        final uid = await _authService.getCurrentUid();
+
+        final user = User(
+          userName: userName,
+          emailAddress: email,
+          password: password,
+          profilePhotoUrl: profilePhotoUrl,
+          id: uid,
+        );
+        await _userService.addUser(uid, user);
         return true;
       } else {
         log('email address is already in use');

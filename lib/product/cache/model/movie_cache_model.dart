@@ -15,7 +15,7 @@ final class MovieCacheModel with CacheModel {
       return this;
     }
     return copyWith(
-      movie: Movie.fromJson(jsonMap),
+      movie: Movie().fromJson(jsonMap),
     );
   }
 
@@ -24,7 +24,7 @@ final class MovieCacheModel with CacheModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return movie.toJson();
+    return Movie().toJson();
   }
 
   MovieCacheModel copyWith({
