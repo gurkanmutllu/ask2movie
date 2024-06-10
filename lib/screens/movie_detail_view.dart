@@ -1,9 +1,9 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/indicators/custom_rating_bar_indicator.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:readmore/readmore.dart';
 
 class MovieDetailView extends StatelessWidget {
@@ -84,13 +84,9 @@ class _MovieInfoColumnDetailView extends StatelessWidget {
           child: Row(
             children: [
               SubTitleWidget.m1(title: movie.rate.toString()),
-              RatingBarIndicator(
-                rating: movie.rate ?? 0,
-                itemBuilder: (context, index) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                itemSize: 25,
+              CustomRatingBarIndicator(
+                movie: movie,
+                itemSize: 15,
               ),
             ],
           ),
@@ -102,7 +98,7 @@ class _MovieInfoColumnDetailView extends StatelessWidget {
         Padding(
           padding: PaddingItems.verticalPadding,
           child: ReadMoreText(
-            movie.description ?? '' * 5,
+            movie.description ?? '',
             colorClickableText: Colors.amber,
           ),
         ),

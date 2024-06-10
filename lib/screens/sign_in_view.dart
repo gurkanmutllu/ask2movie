@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/image_items.dart';
@@ -12,6 +13,7 @@ import 'package:ask2movie/screens/mixins/signin_view_mixin.dart';
 import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -26,7 +28,7 @@ class _SignInViewState extends State<SignInView>
   late final TextEditingController _passwordController;
   late final TextEditingController _userNameController;
   late final GlobalKey<FormState> _key;
-
+  late File? _selectedImage;
   @override
   void initState() {
     super.initState();
@@ -34,6 +36,7 @@ class _SignInViewState extends State<SignInView>
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _userNameController = TextEditingController();
+    _selectedImage = null;
   }
 
   @override
@@ -87,6 +90,16 @@ class _SignInViewState extends State<SignInView>
                   isObscure: true,
                 ),
                 CustomElevatedButton(
+                  buttonText: 'Select an image',
+                  buttonColor: Colors.white,
+                  textColor: Colors.black,
+                  onPressed: _pickImageFromGallery,
+                ),
+                // SizedBox(
+                //   height: 50,
+                //   child: Image.file(_selectedImage!),
+                // ),
+                CustomElevatedButton(
                   buttonText: LocaleKeys.signIn_signUp.tr(),
                   buttonColor: Colors.amber,
                   textColor: Colors.black,
@@ -95,25 +108,21 @@ class _SignInViewState extends State<SignInView>
                       userName: _userNameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,
-                      profilePhotoUrl: '',
+                      profilePhoto: _selectedImage,
                       key: _key,
+                      dialogMessage: 'email or username already in use',
+                      snackbarMessage: 'email address is not valid',
                     );
                     if (isSuccess) {
                       pushReplaceAll(const BottomNavBar());
-                    } else {
-                      if (!context.mounted) return;
-                      await _showEmailInUseDialog(
-                        context,
-                        'The email you entered is already in use.',
-                      );
-                    }
+                    } else {}
                   },
                 ),
                 CustomElevatedButton(
                   onPressed: () {
                     // pushTo(const LoginView());
                     pop(context);
-                    Future<void>.delayed(const Duration(seconds: 3))
+                    Future<void>.delayed(const Duration(seconds: 1))
                         .then((value) {
                       log('object');
                       setState(() {});
@@ -148,22 +157,22 @@ class _SignInViewState extends State<SignInView>
       ),
     );
   }
-}
 
-Future<void> _showEmailInUseDialog(BuildContext context, String message) {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Alert!'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(message),
-            ],
-          ),
-        ),
-      );
-    },
-  );
+  Future<void> _pickImageFromGallery() async {
+    try {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage == null) return;
+
+      setState(() {
+        _selectedImage = File(pickedImage.path);
+      });
+
+      if (_selectedImage != null) {
+        log('Image selected: ${_selectedImage!.path}');
+      }
+    } catch (e) {
+      log('Error picking image: $e');
+    }
+  }
 }

@@ -5,6 +5,7 @@ import 'package:ask2movie/customs/images/custom_png_image.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
 import 'package:ask2movie/models/user_model.dart';
+import 'package:ask2movie/product/constants/string_constants.dart';
 import 'package:ask2movie/screens/mixins/settings_view_mixin.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView>
       appBar: AppBar(
         title: const Padding(
           padding: PaddingItems.topPadding2x,
-          child: TitleWidget(title: 'Ask2Movie'),
+          child: TitleWidget(title: StringConstants.appName),
         ),
         actions: const [
           Padding(
@@ -101,9 +102,9 @@ class _UserInfoColumn extends StatelessWidget {
             title: user.userName ?? '',
             textColor: Colors.amber,
           ),
+          Text('email address: ${user.emailAddress}'),
           CustomUpdateTextButton(
             title: 'Update username',
-            buttonTitle: 'Update username',
             textFieldLabel: 'username',
             inputType: TextInputType.name,
             user: user,
@@ -111,7 +112,6 @@ class _UserInfoColumn extends StatelessWidget {
           ),
           CustomUpdateTextButton(
             title: 'Update email address',
-            buttonTitle: 'Update email address',
             textFieldLabel: 'email address',
             inputType: TextInputType.name,
             user: user,
@@ -119,7 +119,6 @@ class _UserInfoColumn extends StatelessWidget {
           ),
           CustomUpdateTextButton(
             title: 'Update password',
-            buttonTitle: 'Update password',
             textFieldLabel: 'password',
             inputType: TextInputType.name,
             user: user,

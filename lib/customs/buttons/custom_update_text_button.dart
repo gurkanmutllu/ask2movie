@@ -10,7 +10,6 @@ class CustomUpdateTextButton extends StatelessWidget
     with SettingsViewMixinStateless, NavigationWrapperMixinStateless {
   CustomUpdateTextButton({
     required this.title,
-    required this.buttonTitle,
     required this.textFieldLabel,
     required this.inputType,
     required this.user,
@@ -18,7 +17,6 @@ class CustomUpdateTextButton extends StatelessWidget
     super.key,
   });
 
-  final String buttonTitle;
   final String title;
   final String textFieldLabel;
   final TextInputType inputType;
@@ -33,7 +31,7 @@ class CustomUpdateTextButton extends StatelessWidget
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text(buttonTitle),
+          title: Text(title),
           content: SizedBox(
             height: 300,
             child: Center(
@@ -58,26 +56,31 @@ class CustomUpdateTextButton extends StatelessWidget
             ),
             TextButton(
               onPressed: () async {
+                late User updatedUser;
+                switch (value) {
+                  case 'userName':
+                    updatedUser = user.copyWith(
+                      userName: _controller.text,
+                    );
+                  case 'emailAddress':
+                    updatedUser = user.copyWith(
+                      emailAddress: _controller.text,
+                    );
+                  case 'password':
+                    updatedUser = user.copyWith(
+                      password: _controller.text,
+                    );
+                  default:
+                    updatedUser = user;
+                }
                 final currentUid = await AuthService.instance.getCurrentUid();
-                final updatedUser = user.copyWith(userName: _controller.text);
+
                 await _userService.updateUser(currentUid, updatedUser);
-                if (!context.mounted) return;
-
-                pop(context);
-
-                // switch (_controller.text) {
-                //   case 'userName':
-                //     user.userName = _controller.text;
-                //     updateUser(user);
-
-                //   case 'emailAddress':
-                //     user.emailAddress = _controller.text;
-                //     updateUser(user);
-
-                //   case 'password':
-                //     user.password = _controller.text;
-                //     updateUser(user);
-                // }
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (context.mounted) {
+                    Navigator.pop(context, 'OK');
+                  }
+                });
               },
               child: const Text('OK'),
             ),
@@ -88,7 +91,7 @@ class CustomUpdateTextButton extends StatelessWidget
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            buttonTitle,
+            title,
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           const Icon(

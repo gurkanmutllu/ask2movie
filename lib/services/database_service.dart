@@ -1,21 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class DatabaseService {
-  DatabaseService({required this.uid});
+  DatabaseService();
 
-  final String uid;
-  final CollectionReference ask2movieCollection =
-      FirebaseFirestore.instance.collection('users');
+  Future<String> uploadImageToTemp(File imageFile) async {
+    final storage = FirebaseStorage.instance;
+    final ref = storage.ref().child('temp/${basename(imageFile.path)}');
+    final uploadTask = ref.putFile(imageFile);
 
-  Future<void> updateUserData(
-    String userName,
-    String emailAddress,
-    String password,
+    final snapshot = await uploadTask;
+    final url = await snapshot.ref.getDownloadURL();
+
+    return url;
+  }
+
+  Future<String> moveImageToUserFolder(
+    String tempImageUrl,
+    String userId,
   ) async {
-    return ask2movieCollection.doc(uid).set({
-      'userName': userName,
-      'emailAddress': emailAddress,
-      'password': password,
-    });
+    final storage = FirebaseStorage.instance;
+    final tempRef = storage.refFromURL(tempImageUrl);
+    final userRef =
+        storage.ref().child('users/$userId/${basename(tempRef.name)}');
+
+    final data = await tempRef.getData();
+
+    final uploadTask = userRef.putData(data!);
+    await uploadTask;
+
+    await tempRef.delete();
+
+    final newUrl = await userRef.getDownloadURL();
+
+    return newUrl;
   }
 }

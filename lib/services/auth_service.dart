@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:ask2movie/models/user_model.dart';
 import 'package:ask2movie/providers/auth/auth_service_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth_user;
 
@@ -39,6 +40,18 @@ class AuthService {
     );
     if (result.data != null) {
       return result.data;
+    }
+    return null;
+  }
+
+  Future<auth_user.UserCredential?> updateUser({
+    required String userId,
+    required User user,
+  }) async {
+    final result = await _authProvider.getCurrentUser();
+    if (result != null) {
+      await result.verifyBeforeUpdateEmail(user.emailAddress ?? '');
+      await result.updatePassword(user.password ?? '');
     }
     return null;
   }

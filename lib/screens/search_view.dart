@@ -10,7 +10,7 @@ class SearchView extends StatelessWidget {
         alignment: Alignment.center,
         width: double.infinity,
         height: double.infinity,
-        color: Colors.yellowAccent,
+        color: Colors.amber,
         child: Text(
           'Search',
           style: Theme.of(context)

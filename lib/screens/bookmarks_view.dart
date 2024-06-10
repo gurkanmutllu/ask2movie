@@ -7,8 +7,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BookmarksView extends StatelessWidget {
-  const BookmarksView({required this.movie, super.key});
-  final Movie movie;
+  const BookmarksView({required this.movies, super.key});
+  final List<Movie> movies;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +21,10 @@ class BookmarksView extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverList.builder(
+            itemCount: movies.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomSliverListContainer(
-                movie: movie,
+                movie: movies.elementAt(index),
               );
             },
           ),

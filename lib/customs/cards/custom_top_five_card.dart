@@ -1,10 +1,10 @@
+import 'package:ask2movie/customs/indicators/custom_rating_bar_indicator.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
 import 'package:ask2movie/screens/movie_detail_view.dart';
 import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CustomTopFiveCard extends StatelessWidget
     with NavigationWrapperMixinStateless {
@@ -37,14 +37,7 @@ class CustomTopFiveCard extends StatelessWidget
               SubTitleWidget.m1(
                 title: movie.rate.toString(),
               ),
-              RatingBarIndicator(
-                rating: movie.rate ?? 0,
-                itemBuilder: (context, index) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                itemSize: 25,
-              ),
+              CustomRatingBarIndicator(movie: movie),
             ],
           ),
         ],
