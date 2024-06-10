@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 mixin BottomNavbarMixin on State<BottomNavBar> {
   final _movieService = MovieService.instance;
 
-  Future<Movie?> getMovieByName(String name) async {
-    final movie = await _movieService.getMovieByName(name);
-    return movie;
+  Future<List<Movie>> getMovies() async {
+    final movies = await _movieService.getMovies();
+    return movies!;
   }
 }

@@ -21,9 +21,29 @@ class FireStoreProvider {
     _instance.doc(path).update(model.toJson());
   }
 
-  void get<T extends IdModel>({
+  Future<List<T>> get<T extends IdModel>({
     required String path,
-  }) {
-    _instance.doc(path).get();
+    required BaseFirebaseModel<T> model,
+  }) async {
+    final collection = await _instance.collection(path).get();
+
+    final items = <T>[];
+
+    for (final doc in collection.docs) {
+      final data = doc.data();
+      final item = model.fromJson(data);
+      items.add(item);
+    }
+    return items;
+  }
+
+  Future<T> getById<T extends IdModel>({
+    required String path,
+    required String id,
+    required BaseFirebaseModel<T> model,
+  }) async {
+    final doc = await _instance.collection(path).doc(id).get();
+    final idModel = model.fromJson(doc.data()!);
+    return idModel;
   }
 }

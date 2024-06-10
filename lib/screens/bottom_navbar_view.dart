@@ -18,26 +18,33 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> with BottomNavbarMixin {
   int _selectedIndex = 0;
   late List<Widget> _widgetOptions;
-  Movie? _movie;
+  late List<Movie> _movies;
 
   @override
   void initState() {
     super.initState();
-
+    _movies = [];
+    _widgetOptions = <Widget>[
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+      const SearchView(),
+      const Center(
+        child: CircularProgressIndicator(),
+      ),
+      const SettingsView(),
+    ];
     _loadMovie();
   }
 
   Future<void> _loadMovie() async {
-    final movie = await getMovieByName(
-      'KBAWBg0zuiMDHZY2lOxX',
-    );
-
+    final movies = await getMovies();
     setState(() {
-      _movie = movie;
+      _movies = movies;
       _widgetOptions = <Widget>[
-        HomeView(movie: _movie),
+        HomeView(movies: _movies),
         const SearchView(),
-        BookmarksView(movie: _movie),
+        BookmarksView(movies: _movies),
         const SettingsView(),
       ];
     });

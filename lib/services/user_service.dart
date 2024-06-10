@@ -18,27 +18,22 @@ class UserService {
 
   Future<User?> getUserById(String userId) async {
     try {
-      final userDoc = await users.doc(userId).get();
-      if (userDoc.exists) {
-        final data = userDoc.data();
-        if (data != null && data is Map<String, dynamic>) {
-          return const User().fromJson(data);
-        }
-      }
-      return null;
+      final result = await _fireStoreProvider.getById(
+        path: 'users',
+        id: userId,
+        model: const User(),
+      );
+      return result;
     } catch (e) {
-      log('Error getting user by ID: $e');
-      return null;
+      log('error getting user');
     }
+    return null;
   }
 
   Future<void> addUser(String userId, User user) async {
     final path = 'users/$userId';
-    final emailQuery =
-        await users.where('emailAddress', isEqualTo: user.emailAddress).get();
-    if (emailQuery.docs.isEmpty) {
-      _fireStoreProvider.add(path: path, model: user);
-    }
+
+    _fireStoreProvider.add(path: path, model: user);
   }
 
   Future<void> updateUser(String userId, User user) async {
@@ -47,10 +42,13 @@ class UserService {
     await _authService.updateUser(userId: userId, user: user);
   }
 
-  Future<bool> checkUserInfo(String userName) async {
+  Future<bool> checkUserInfo(String userName, String emailAddress) async {
     final userNameQuery =
         await users.where('userName', isEqualTo: userName).get();
-    if (userNameQuery.docs.isEmpty) {
+    final emailQuery =
+        await users.where('emailAddress', isEqualTo: emailAddress).get();
+
+    if (userNameQuery.docs.isEmpty && emailQuery.docs.isEmpty) {
       return true;
     } else {
       return false;

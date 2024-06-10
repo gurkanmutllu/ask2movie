@@ -14,12 +14,25 @@ class MovieService {
   CollectionReference get movies =>
       FirebaseFirestore.instance.collection('movies');
 
-  Future<Movie?> getMovieByName(String name) async {
-    final path = 'movies/$name';
+  Future<List<Movie>?> getMovies() async {
     try {
-      _fireStoreProvider.get(path: path);
+      final result = await _fireStoreProvider.get(
+        path: 'movies',
+        model: Movie(),
+      );
+      return result;
     } catch (e) {
       log('Error getting movie');
+      return null;
+    }
+  }
+
+  Future<List<Movie>?> getTopFive() async {
+    try {
+      final result =
+          await _fireStoreProvider.get(path: 'movies', model: Movie());
+      final sorted = result.sort();
+    } catch (e) {
       return null;
     }
     return null;
