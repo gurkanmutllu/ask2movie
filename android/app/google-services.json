@@ -12,7 +12,20 @@
           "package_name": "com.example.ask2movie"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1029458190354-jnq7c2sc9517r5gf87n9hs4iiq34a6qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ask2movie",
+            "certificate_hash": "73e71c199d526620f2d6401ad7472f344be22d79"
+          }
+        },
+        {
+          "client_id": "1029458190354-bjqrmltrs0l6j6ldq6593gusn03m9c6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAqRXyn0m33z19ZtrboTiDJ1caJLo-887Y"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029458190354-bjqrmltrs0l6j6ldq6593gusn03m9c6e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1029458190354-tu4nttv7gtk5l6fe488euh9u77ukr34t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ask2movie"
+              }
+            }
+          ]
         }
       }
     }

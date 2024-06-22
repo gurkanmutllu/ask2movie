@@ -1,8 +1,9 @@
 import 'dart:developer';
 
-import 'package:ask2movie/models/user_model.dart';
+import 'package:ask2movie/models/user_model.dart' as user_model;
 import 'package:ask2movie/providers/auth/auth_service_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth_user;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   AuthService._init();
@@ -10,7 +11,7 @@ class AuthService {
   static AuthService get instance => _instance;
   final _authProvider = AuthServiceProvider.instance;
 
-  Future<auth_user.UserCredential?> loginWithEmail({
+  Future<UserCredential?> loginWithEmail({
     required String email,
     required String password,
   }) async {
@@ -30,7 +31,7 @@ class AuthService {
     return;
   }
 
-  Future<auth_user.UserCredential?> createUserWithEmail({
+  Future<UserCredential?> createUserWithEmail({
     required String email,
     required String password,
   }) async {
@@ -44,9 +45,21 @@ class AuthService {
     return null;
   }
 
-  Future<auth_user.UserCredential?> updateUser({
+  Future<UserCredential> googleSignIn() async {
+    final googleUser = await GoogleSignIn().signIn();
+
+    final googleAuth = await googleUser!.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    return FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<UserCredential?> updateUser({
     required String userId,
-    required User user,
+    required user_model.User user,
   }) async {
     final result = await _authProvider.getCurrentUser();
     if (result != null) {
