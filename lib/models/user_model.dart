@@ -7,7 +7,7 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class User extends Equatable with IdModel, BaseFirebaseModel<User> {
-  const User({
+  User({
     this.emailAddress,
     this.password,
     this.profilePhotoUrl,
@@ -20,7 +20,7 @@ class User extends Equatable with IdModel, BaseFirebaseModel<User> {
         profilePhotoUrl: credential.user?.photoURL,
       );
 
-  // factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   final String? emailAddress;
   final String? password;
@@ -29,7 +29,6 @@ class User extends Equatable with IdModel, BaseFirebaseModel<User> {
   @override
   final String? id;
 
-  // @override
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
@@ -58,15 +57,3 @@ class User extends Equatable with IdModel, BaseFirebaseModel<User> {
     return _$UserFromJson(json);
   }
 }
-
-// class User2 with BaseFirebaseModel<User2> {
-//   @override
-//   Map<String, dynamic> toJson() {
-//     throw UnimplementedError();
-//   }
-
-//   @override
-//   User2 fromJson() {
-//     throw UnimplementedError();
-//   }
-// }

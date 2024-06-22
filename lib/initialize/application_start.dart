@@ -1,4 +1,5 @@
 import 'package:ask2movie/firebase_options.dart';
+import 'package:ask2movie/product/cache/product_cache.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,5 +13,6 @@ class ApplicationStart {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await ProductCache.instance.init();
   }
 }

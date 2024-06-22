@@ -36,14 +36,4 @@ class FireStoreProvider {
     }
     return items;
   }
-
-  Future<T> getById<T extends IdModel>({
-    required String path,
-    required String id,
-    required BaseFirebaseModel<T> model,
-  }) async {
-    final doc = await _instance.collection(path).doc(id).get();
-    final idModel = model.fromJson(doc.data()!);
-    return idModel;
-  }
 }

@@ -15,7 +15,7 @@ class Movie extends Equatable with IdModel, BaseFirebaseModel<Movie> {
     this.rate,
   });
 
-  // factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
   @override
   final String? id;

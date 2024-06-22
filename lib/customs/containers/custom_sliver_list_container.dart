@@ -2,10 +2,10 @@
 
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/cards/movie_info_column.dart';
+import 'package:ask2movie/customs/images/image_with_icon_button.dart';
 import 'package:ask2movie/models/movie_model.dart';
 import 'package:ask2movie/screens/movie_detail_view.dart';
 import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomSliverListContainer extends StatelessWidget
@@ -28,7 +28,9 @@ class CustomSliverListContainer extends StatelessWidget
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: _ImageWithIconButton(movie),
+              child: ImageWithIconButton(
+                movie: movie,
+              ),
             ),
             Expanded(
               child: Padding(
@@ -41,43 +43,6 @@ class CustomSliverListContainer extends StatelessWidget
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ImageWithIconButton extends StatelessWidget {
-  const _ImageWithIconButton(this.movie);
-
-  final Movie movie;
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topRight,
-      children: [
-        CachedNetworkImage(
-          imageUrl: movie.imageUrl ?? '',
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.cover,
-              ),
-            ),
-            height: 300,
-          ),
-          placeholder: (context, url) => const CircularProgressIndicator(),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
-        IconButton(
-          color: Colors.amber,
-          onPressed: () {},
-          icon: const Icon(
-            Icons.bookmark_outlined,
-            size: 30,
-          ),
-        ),
-      ],
     );
   }
 }

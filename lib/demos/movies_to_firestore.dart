@@ -40,11 +40,11 @@ class UploadJsonToFirestoreButton extends StatelessWidget {
 
 Future<void> uploadJsonToFirestore() async {
   try {
-    const jsonFilePath = 'assets/jsons/movies.json';
+    const jsonFilePath = 'assets/jsons/id-script.json';
 
     final movies = await readJsonFile(jsonFilePath);
 
-    final collectionRef = FirebaseFirestore.instance.collection('movies');
+    final collectionRef = FirebaseFirestore.instance.collection('dialogues');
 
     for (final movie in movies) {
       await collectionRef.add(movie);

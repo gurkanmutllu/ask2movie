@@ -29,4 +29,7 @@ class PaddingItems {
   static const EdgeInsets leftPadding = EdgeInsets.only(left: 15);
   static const EdgeInsets movieInfoColumnDetailViewPadding =
       EdgeInsets.only(top: 500, right: 10, left: 10);
+
+  static const EdgeInsets textFieldPadding =
+      EdgeInsets.only(top: 20, left: 20, right: 20);
 }

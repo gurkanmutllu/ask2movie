@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/image_items.dart';
 import 'package:ask2movie/core/project_items/padding_items.dart';
@@ -113,11 +111,6 @@ class _LoginViewState extends State<LoginView>
                 ),
                 CustomElevatedButton(
                   onPressed: () async {
-                    await Future<void>.delayed(const Duration(seconds: 3))
-                        .then((value) {
-                      log('object');
-                      setState(() {});
-                    });
                     await pushTo(const SignInView());
                   },
                   buttonText: LocaleKeys.login_doHaveAccount.tr(),

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      title: 'Flutter Demo',
+      title: 'Ask2Movie',
       theme: ThemeData(
         brightness: Brightness.dark,
         useMaterial3: true,
