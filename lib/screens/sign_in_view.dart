@@ -14,6 +14,7 @@ import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kartal/kartal.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -24,19 +25,12 @@ class SignInView extends StatefulWidget {
 
 class _SignInViewState extends State<SignInView>
     with NavigationWrapperMixin, SignInViewMixin {
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
-  late final TextEditingController _userNameController;
-  late final GlobalKey<FormState> _key;
-  late File? _selectedImage;
+  late bool _isSelected;
   @override
   void initState() {
     super.initState();
-    _key = GlobalKey();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _userNameController = TextEditingController();
-    _selectedImage = null;
+    selectedImage = null;
+    _isSelected = false;
   }
 
   @override
@@ -56,27 +50,28 @@ class _SignInViewState extends State<SignInView>
         child: Padding(
           padding: PaddingItems.topPadding2x,
           child: Form(
-            key: _key,
+            key: key,
             child: Column(
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 100,
                   width: 100,
-                  child: PngImage(name: ImageItems.ask2movieIcon),
+                  child: _isSelected
+                      ? _selectedImageBox()
+                      : const PngImage(name: ImageItems.ask2movieIcon),
                 ),
                 CustomTextFormField(
                   validator: (value) => value!.isEmpty
                       ? LocaleKeys.base_couldNotEmpty.tr()
                       : null,
-                  controller: _userNameController,
+                  controller: userNameController,
                   labelText: LocaleKeys.base_userName.tr(),
                   inputType: TextInputType.text,
                 ),
                 CustomTextFormField(
-                  validator: (value) => value!.isEmpty
-                      ? LocaleKeys.base_couldNotEmpty.tr()
-                      : null,
-                  controller: _emailController,
+                  validator: (value) =>
+                      value.ext.isValidEmail ? null : 'email is not valid',
+                  controller: emailController,
                   labelText: LocaleKeys.base_email.tr(),
                   inputType: TextInputType.emailAddress,
                 ),
@@ -84,35 +79,23 @@ class _SignInViewState extends State<SignInView>
                   validator: (value) => value!.isEmpty
                       ? LocaleKeys.base_couldNotEmpty.tr()
                       : null,
-                  controller: _passwordController,
+                  controller: passwordController,
                   labelText: LocaleKeys.base_password.tr(),
                   inputType: TextInputType.text,
                   isObscure: true,
                 ),
                 CustomElevatedButton(
-                  buttonText: 'Select an image',
+                  buttonText: 'Select a profile photo',
                   buttonColor: Colors.white,
                   textColor: Colors.black,
                   onPressed: _pickImageFromGallery,
                 ),
-                // SizedBox(
-                //   height: 50,
-                //   child: Image.file(_selectedImage!),
-                // ),
                 CustomElevatedButton(
                   buttonText: LocaleKeys.signIn_signUp.tr(),
                   buttonColor: Colors.amber,
                   textColor: Colors.black,
                   onPressed: () async {
-                    final isSuccess = await addUser(
-                      userName: _userNameController.text,
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      profilePhoto: _selectedImage,
-                      key: _key,
-                      dialogMessage: 'email or username already in use',
-                      snackbarMessage: 'email address is not valid',
-                    );
+                    final isSuccess = await addUser();
                     if (isSuccess) {
                       pushReplaceAll(const BottomNavBar());
                     } else {}
@@ -124,7 +107,6 @@ class _SignInViewState extends State<SignInView>
                     pop(context);
                     Future<void>.delayed(const Duration(seconds: 1))
                         .then((value) {
-                      log('object');
                       setState(() {});
                     });
                   },
@@ -158,6 +140,13 @@ class _SignInViewState extends State<SignInView>
     );
   }
 
+  SizedBox _selectedImageBox() {
+    return SizedBox(
+      height: 50,
+      child: Image.file(selectedImage!),
+    );
+  }
+
   Future<void> _pickImageFromGallery() async {
     try {
       final pickedImage =
@@ -165,11 +154,12 @@ class _SignInViewState extends State<SignInView>
       if (pickedImage == null) return;
 
       setState(() {
-        _selectedImage = File(pickedImage.path);
+        selectedImage = File(pickedImage.path);
+        _isSelected = true;
       });
 
-      if (_selectedImage != null) {
-        log('Image selected: ${_selectedImage!.path}');
+      if (selectedImage != null) {
+        log('Image selected: ${selectedImage!.path}');
       }
     } catch (e) {
       log('Error picking image: $e');

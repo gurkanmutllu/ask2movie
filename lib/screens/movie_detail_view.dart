@@ -1,4 +1,5 @@
 import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/buttons/bookmark_button.dart';
 import 'package:ask2movie/customs/indicators/custom_rating_bar_indicator.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/models/movie_model.dart';
@@ -15,10 +16,7 @@ class MovieDetailView extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.bookmark_border_outlined),
-          ),
+          BookmarkButton(movie: movie),
         ],
         flexibleSpace: FlexibleSpaceBar(
           background: Container(

@@ -44,7 +44,9 @@ class _BottomNavBarState extends State<BottomNavBar> with BottomNavbarMixin {
       _widgetOptions = <Widget>[
         HomeView(movies: _movies),
         const SearchView(),
-        BookmarksView(movies: _movies),
+        BookmarksView(
+            // movies: _movies,
+            ),
         const SettingsView(),
       ];
     });
