@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1029458190354',
     projectId: 'ask2movie-46970',
     storageBucket: 'ask2movie-46970.appspot.com',
+    androidClientId: '1029458190354-jnq7c2sc9517r5gf87n9hs4iiq34a6qu.apps.googleusercontent.com',
+    iosClientId: '1029458190354-tu4nttv7gtk5l6fe488euh9u77ukr34t.apps.googleusercontent.com',
     iosBundleId: 'com.example.ask2movie',
   );
 

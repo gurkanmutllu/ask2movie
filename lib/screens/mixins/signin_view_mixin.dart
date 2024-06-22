@@ -17,6 +17,26 @@ mixin SignInViewMixin<T extends StatefulWidget> on State<SignInView> {
   final GlobalKey<FormState> key = GlobalKey();
   late File? selectedImage;
 
+  Future<bool> addGoogleUser() async {
+    try {
+      final result = await _authService.googleSignIn();
+      final uid = await _authService.getCurrentUid();
+
+      final user = User(
+        userName: result.user?.displayName,
+        emailAddress: result.user?.email,
+        password: '',
+        profilePhotoUrl: result.user?.photoURL,
+        id: uid,
+      );
+      await _userService.addUser(uid, user);
+      return true;
+    } catch (e) {
+      Exception(e);
+      return false;
+    }
+  }
+
   Future<bool> addUser() async {
     if (!(key.currentState?.validate() ?? false)) return false;
     if (selectedImage == null) {

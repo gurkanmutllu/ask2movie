@@ -122,7 +122,18 @@ class _LoginViewState extends State<LoginView>
                   child: Text(LocaleKeys.login_or.tr()),
                 ),
                 CustomElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final result = await googleLogin();
+                    if (result == true) {
+                      pushReplaceAll(const BottomNavBar());
+                    } else {
+                      if (!context.mounted) return;
+                      await _showEmailInUseDialog(
+                        context,
+                        'Wrong email or password!',
+                      );
+                    }
+                  },
                   buttonText:
                       LocaleKeys.base_googleLogin.tr(args: [loginString]),
                   buttonIcon: Icons.g_mobiledata_outlined,

@@ -25,4 +25,9 @@ mixin LoginViewMixin on State<LoginView> {
       return false;
     }
   }
+
+  Future<bool> googleLogin() async {
+    await _authService.googleSignIn();
+    return true;
+  }
 }
