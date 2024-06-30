@@ -1,5 +1,6 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/buttons/bottomsheet_with_photo.dart';
 import 'package:ask2movie/customs/buttons/custom_text_button.dart';
 import 'package:ask2movie/customs/buttons/custom_text_button_with_bottomsheet.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
@@ -101,8 +102,7 @@ class _SettingsViewState extends State<SettingsView>
                         .bodyLarge
                         ?.copyWith(color: Colors.grey),
                   ),
-                  CustomTextButtonBottomsheet.m1(
-                    bottomsheetText: StringConstants.aboutUs,
+                  CustomTextButtonBottomsheetWithImage(
                     title: LocaleKeys.settings_aboutUs.tr(),
                   ),
                   CustomTextButtonBottomsheet.m1(

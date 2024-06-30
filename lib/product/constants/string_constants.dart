@@ -1,7 +1,8 @@
 class StringConstants {
   const StringConstants._();
   static const String appName = 'Ask2Movie';
-  static const String aboutUs = 'Gürkan Mutlu \n Muhammed Fatih Yüzgül';
+  static const String aboutUsGurkan = 'Gürkan Mutlu ';
+  static const String aboutUsFatih = 'Muhammed Fatih Yüzgül';
   static const String privacyPolicy = 'Our Privacy Policy is: \n ...';
   static const String termsAndConditions = 'Terms and Conditions: \n ...';
   static const String wrongEmailOrPassword = 'Wrong email or password!';
