@@ -1,5 +1,6 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/padding_items.dart';
+import 'package:ask2movie/customs/buttons/custom_dropdown_button.dart';
 import 'package:ask2movie/customs/cards/custom_top_five_card.dart';
 import 'package:ask2movie/customs/containers/custom_sliver_list_container.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
@@ -17,9 +18,20 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with MovieViewMixin {
+  late List<Movie> _movies;
+  List<Movie> _topFiveMovies = [];
   @override
   void initState() {
     super.initState();
+    _movies = widget.movies;
+    _loadTopFive();
+  }
+
+  Future<void> _loadTopFive() async {
+    final topFive = await getTopFive();
+    setState(() {
+      _topFiveMovies = topFive;
+    });
   }
 
   @override
@@ -34,23 +46,36 @@ class _HomeViewState extends State<HomeView> with MovieViewMixin {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: PaddingItems.topPadding2x,
+            padding: PaddingItems.zeroPadding,
             sliver: SliverToBoxAdapter(
-              child: SizedBox(
-                height: 300,
-                child: ListView.builder(
-                  itemCount: 5,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    final movie = widget.movies.elementAt(index);
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SizedBox(
-                        width: 300,
-                        child: CustomTopFiveCard(movie: movie),
-                      ),
-                    );
-                  },
+              child: Padding(
+                padding: PaddingItems.horizontalPadding,
+                child: SizedBox(
+                  height: 400,
+                  child: _topFiveMovies.isEmpty
+                      ? Center(child: CircularProgressIndicator())
+                      : Column(
+                          children: [
+                            TitleWidget(title: LocaleKeys.home_topFive.tr()),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: _topFiveMovies.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final movie = _topFiveMovies.elementAt(index);
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: SizedBox(
+                                      width: 300,
+                                      child: CustomTopFiveCard(movie: movie),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
               ),
             ),
@@ -58,17 +83,34 @@ class _HomeViewState extends State<HomeView> with MovieViewMixin {
           SliverToBoxAdapter(
             child: Padding(
               padding: PaddingItems.horizontalPadding,
-              child: TitleWidget(
-                title: LocaleKeys.home_latest.tr(),
-                padding: PaddingItems.zeroPadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TitleWidget(
+                      title: LocaleKeys.home_latest.tr(),
+                      padding: PaddingItems.zeroPadding,
+                    ),
+                  ),
+                  Padding(
+                    padding: PaddingItems.horizontalPadding,
+                    child: CustomDropdownButton(
+                      onChangedMovies: (value) {
+                        setState(() {
+                          _movies = value ?? _movies;
+                        });
+                      },
+                      movies: _movies,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
           SliverList.builder(
-            itemCount: widget.movies.length,
+            itemCount: _movies.length,
             itemBuilder: (BuildContext context, int index) {
               return CustomSliverListContainer(
-                movie: widget.movies.elementAt(index),
+                movie: _movies.elementAt(index),
               );
             },
           ),

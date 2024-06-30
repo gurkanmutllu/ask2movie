@@ -1,9 +1,11 @@
 import 'package:ask2movie/core/init/locale_keys.g.dart';
 import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/buttons/custom_text_button.dart';
+import 'package:ask2movie/customs/buttons/custom_text_button_with_bottomsheet.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
 import 'package:ask2movie/models/user_model.dart';
+import 'package:ask2movie/product/constants/string_constants.dart';
 import 'package:ask2movie/screens/login_view.dart';
 import 'package:ask2movie/screens/mixins/settings_view_mixin.dart';
 import 'package:ask2movie/screens/update_profile_view.dart';
@@ -80,10 +82,6 @@ class _SettingsViewState extends State<SettingsView>
                   },
                 ),
                 CustomTextButton.m1(
-                  title: LocaleKeys.settings_changeLanguage.tr(),
-                  onPressed: () {},
-                ),
-                CustomTextButton.m1(
                   title: LocaleKeys.settings_logOut.tr(),
                   onPressed: () {
                     _authService.signOut();
@@ -103,17 +101,17 @@ class _SettingsViewState extends State<SettingsView>
                         .bodyLarge
                         ?.copyWith(color: Colors.grey),
                   ),
-                  CustomTextButton.m1(
+                  CustomTextButtonBottomsheet.m1(
+                    bottomsheetText: StringConstants.aboutUs,
                     title: LocaleKeys.settings_aboutUs.tr(),
-                    onPressed: () {},
                   ),
-                  CustomTextButton.m1(
+                  CustomTextButtonBottomsheet.m1(
+                    bottomsheetText: StringConstants.privacyPolicy,
                     title: LocaleKeys.settings_privacyPolicy.tr(),
-                    onPressed: () {},
                   ),
-                  CustomTextButton.m1(
+                  CustomTextButtonBottomsheet.m1(
+                    bottomsheetText: StringConstants.termsAndConditions,
                     title: LocaleKeys.settings_terms.tr(),
-                    onPressed: () {},
                   ),
                 ],
               ),

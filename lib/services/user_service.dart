@@ -33,7 +33,6 @@ class UserService {
 
   Future<void> addUser(String userId, User user) async {
     final path = 'users/$userId';
-
     _fireStoreProvider.add(path: path, model: user);
   }
 

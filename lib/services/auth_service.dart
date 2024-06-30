@@ -25,6 +25,13 @@ class AuthService {
     return null;
   }
 
+  Future<void> resetPassword({
+    required String email,
+  }) async {
+    final result = await _authProvider.resetPassword(email);
+    return result;
+  }
+
   Future<void> signOut() async {
     await _authProvider.signOut();
     log('log out !!!');
@@ -45,16 +52,18 @@ class AuthService {
     return null;
   }
 
-  Future<UserCredential> googleSignIn() async {
+  Future<UserCredential?> googleSignIn() async {
     final googleUser = await GoogleSignIn().signIn();
+    if (googleUser != null) {
+      final googleAuth = await googleUser.authentication;
 
-    final googleAuth = await googleUser!.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    return FirebaseAuth.instance.signInWithCredential(credential);
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      return FirebaseAuth.instance.signInWithCredential(credential);
+    }
+    return null;
   }
 
   Future<UserCredential?> updateUser({

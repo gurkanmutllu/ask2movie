@@ -15,7 +15,7 @@
 	<key>CFBundleName</key>
 	<string>ask2movie</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>APPL</string>	
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
@@ -45,5 +45,27 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The application needs to use your photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The application needs to use your camera.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The application needs to use your microphone.</string>
+
+	<!-- Google Sign-in Section -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- TODO Replace this value: -->
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.1029458190354-tu4nttv7gtk5l6fe488euh9u77ukr34t</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

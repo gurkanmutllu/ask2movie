@@ -5,8 +5,10 @@ import 'package:ask2movie/customs/buttons/custom_elevated_button.dart';
 import 'package:ask2movie/customs/images/custom_png_image.dart';
 import 'package:ask2movie/customs/text_fields/custom_text_field.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
+import 'package:ask2movie/product/constants/string_constants.dart';
 import 'package:ask2movie/screens/bottom_navbar_view.dart';
 import 'package:ask2movie/screens/mixins/login_view_mixin.dart';
+import 'package:ask2movie/screens/reset_password_view.dart';
 import 'package:ask2movie/screens/sign_in_view.dart';
 import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -35,7 +37,6 @@ class _LoginViewState extends State<LoginView>
 
   @override
   Widget build(BuildContext context) {
-    const loginString = 'Log in';
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -79,13 +80,15 @@ class _LoginViewState extends State<LoginView>
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     InkWell(
-                      child: Text(
-                        LocaleKeys.login_forgotPassword.tr(),
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
+                        child: Text(
+                          LocaleKeys.login_forgotPassword.tr(),
+                          style: const TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
-                      ),
-                    ),
+                        onTap: () {
+                          pushTo(ResetPasswordView());
+                        }),
                   ],
                 ),
                 CustomElevatedButton(
@@ -104,7 +107,7 @@ class _LoginViewState extends State<LoginView>
                       if (!context.mounted) return;
                       await _showEmailInUseDialog(
                         context,
-                        'Wrong email or password!',
+                        StringConstants.wrongEmailOrPassword,
                       );
                     }
                   },
@@ -130,25 +133,14 @@ class _LoginViewState extends State<LoginView>
                       if (!context.mounted) return;
                       await _showEmailInUseDialog(
                         context,
-                        'Wrong email or password!',
+                        StringConstants.wrongEmailOrPassword,
                       );
                     }
                   },
-                  buttonText:
-                      LocaleKeys.base_googleLogin.tr(args: [loginString]),
+                  buttonText: LocaleKeys.base_googleLogin.tr(
+                    args: [StringConstants.loginString],
+                  ),
                   buttonIcon: Icons.g_mobiledata_outlined,
-                ),
-                CustomElevatedButton.icon(
-                  onPressed: () {},
-                  buttonText:
-                      LocaleKeys.base_appleLogin.tr(args: [loginString]),
-                  buttonIcon: Icons.apple_outlined,
-                ),
-                CustomElevatedButton.icon(
-                  onPressed: () {},
-                  buttonText:
-                      LocaleKeys.base_facebookLogin.tr(args: [loginString]),
-                  buttonIcon: Icons.facebook_outlined,
                 ),
               ],
             ),

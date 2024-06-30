@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ask2movie/customs/snackbar/show_snackbar.dart';
 import 'package:ask2movie/models/user_model.dart';
 import 'package:ask2movie/screens/sign_in_view.dart';
 import 'package:ask2movie/services/auth_service.dart';
@@ -22,15 +23,19 @@ mixin SignInViewMixin<T extends StatefulWidget> on State<SignInView> {
       final result = await _authService.googleSignIn();
       final uid = await _authService.getCurrentUid();
 
-      final user = User(
-        userName: result.user?.displayName,
-        emailAddress: result.user?.email,
-        password: '',
-        profilePhotoUrl: result.user?.photoURL,
-        id: uid,
-      );
-      await _userService.addUser(uid, user);
-      return true;
+      if (result != null) {
+        final user = User(
+          userName: result.user?.displayName,
+          emailAddress: result.user?.email,
+          password: '',
+          profilePhotoUrl: result.user?.photoURL,
+          id: uid,
+        );
+        await _userService.addUser(uid, user);
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       Exception(e);
       return false;
@@ -75,28 +80,4 @@ mixin SignInViewMixin<T extends StatefulWidget> on State<SignInView> {
       return false;
     }
   }
-}
-
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBarFun(
-  BuildContext context,
-  String message,
-) {
-  final snackBar = SnackBar(
-    content: Center(
-      child: Text(
-        message,
-        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
-    ),
-    backgroundColor: Colors.amber,
-    dismissDirection: DismissDirection.up,
-    behavior: SnackBarBehavior.floating,
-    margin: EdgeInsets.only(
-      bottom: MediaQuery.of(context).size.height - 150,
-      left: 10,
-      right: 10,
-    ),
-  );
-
-  return ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

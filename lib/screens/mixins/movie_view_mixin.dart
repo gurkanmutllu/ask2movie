@@ -7,6 +7,21 @@ import 'package:flutter/material.dart';
 mixin MovieViewMixin<T extends StatefulWidget> on State<T> {
   final _movieService = MovieService.instance;
 
+  Future<List<Movie>> getTopFive() async {
+    final topFiveMovies = await _movieService.topFiveMovies();
+    return topFiveMovies ?? [];
+  }
+
+  Future<List<Movie>?> filterMoviesByName() async {
+    final movies = await _movieService.filterMoviesByName();
+    return movies;
+  }
+
+  Future<List<Movie>?> filterMoviesByRate() async {
+    final movies = await _movieService.filterMoviesByRate();
+    return movies;
+  }
+
   bool saveMovieToCache(Movie movie) {
     try {
       _movieService.saveMovieToCache(movie);

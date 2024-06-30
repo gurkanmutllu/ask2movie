@@ -32,7 +32,8 @@
         "saveChanges": "Save Changes."
     },
     "home": {
-        "homeTitle": "Top Five.",
+        "homeTitle": "Home Page.",
+        "topFive": "Top Five.",
         "latest": "Latest."
     },
     "bookmarks": {

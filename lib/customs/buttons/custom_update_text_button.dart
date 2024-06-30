@@ -15,6 +15,7 @@ class CustomUpdateTextButton extends StatelessWidget
     required this.user,
     required this.value,
     super.key,
+    required this.text,
   });
 
   final String title;
@@ -23,6 +24,7 @@ class CustomUpdateTextButton extends StatelessWidget
   final TextEditingController _controller = TextEditingController();
   final User user;
   final String value;
+  final String text;
   final _userService = UserService.instance;
 
   @override
@@ -37,7 +39,7 @@ class CustomUpdateTextButton extends StatelessWidget
             child: Center(
               child: Column(
                 children: [
-                  Text(user.userName ?? ''),
+                  Text(text),
                   CustomTextFormField(
                     labelText: textFieldLabel,
                     inputType: inputType,

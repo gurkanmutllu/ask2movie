@@ -33,7 +33,7 @@ class SearchService {
     final results = extractTop<SearchDialogue?>(
       query: query,
       choices: subDialog,
-      limit: 5,
+      limit: 10,
       getter: (obj) => obj?.dialogueText ?? '',
     );
 

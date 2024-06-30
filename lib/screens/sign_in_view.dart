@@ -8,6 +8,7 @@ import 'package:ask2movie/customs/buttons/custom_elevated_button.dart';
 import 'package:ask2movie/customs/images/custom_png_image.dart';
 import 'package:ask2movie/customs/text_fields/custom_text_field.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
+import 'package:ask2movie/product/constants/string_constants.dart';
 import 'package:ask2movie/screens/bottom_navbar_view.dart';
 import 'package:ask2movie/screens/mixins/signin_view_mixin.dart';
 import 'package:ask2movie/utility/mixins/navigation_wrapper_mixin.dart';
@@ -35,7 +36,6 @@ class _SignInViewState extends State<SignInView>
 
   @override
   Widget build(BuildContext context) {
-    const signInString = 'Sign in';
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -69,8 +69,9 @@ class _SignInViewState extends State<SignInView>
                   inputType: TextInputType.text,
                 ),
                 CustomTextFormField(
-                  validator: (value) =>
-                      value.ext.isValidEmail ? null : 'email is not valid',
+                  validator: (value) => value.ext.isValidEmail
+                      ? null
+                      : StringConstants.notValidemail,
                   controller: emailController,
                   labelText: LocaleKeys.base_email.tr(),
                   inputType: TextInputType.emailAddress,
@@ -85,7 +86,7 @@ class _SignInViewState extends State<SignInView>
                   isObscure: true,
                 ),
                 CustomElevatedButton(
-                  buttonText: 'Select a profile photo',
+                  buttonText: StringConstants.selectProfilePhoto,
                   buttonColor: Colors.white,
                   textColor: Colors.black,
                   onPressed: _pickImageFromGallery,
@@ -114,6 +115,10 @@ class _SignInViewState extends State<SignInView>
                   buttonColor: Colors.transparent,
                   textColor: Colors.white,
                 ),
+                Padding(
+                  padding: PaddingItems.verticalPadding,
+                  child: Text(LocaleKeys.login_or.tr()),
+                ),
                 CustomElevatedButton.icon(
                   onPressed: () async {
                     final isSuccess = await addGoogleUser();
@@ -121,21 +126,10 @@ class _SignInViewState extends State<SignInView>
                       pushReplaceAll(const BottomNavBar());
                     } else {}
                   },
-                  buttonText:
-                      LocaleKeys.base_googleLogin.tr(args: [signInString]),
+                  buttonText: LocaleKeys.base_googleLogin.tr(
+                    args: [StringConstants.signInString],
+                  ),
                   buttonIcon: Icons.g_mobiledata_outlined,
-                ),
-                CustomElevatedButton.icon(
-                  onPressed: () {},
-                  buttonText:
-                      LocaleKeys.base_appleLogin.tr(args: [signInString]),
-                  buttonIcon: Icons.apple_outlined,
-                ),
-                CustomElevatedButton.icon(
-                  onPressed: () {},
-                  buttonText:
-                      LocaleKeys.base_facebookLogin.tr(args: [signInString]),
-                  buttonIcon: Icons.facebook_outlined,
                 ),
               ],
             ),

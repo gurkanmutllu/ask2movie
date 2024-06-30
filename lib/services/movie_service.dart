@@ -2,7 +2,6 @@ import 'package:ask2movie/models/movie_model.dart';
 import 'package:ask2movie/product/cache/model/movie_cache_model.dart';
 import 'package:ask2movie/product/cache/product_cache.dart';
 import 'package:ask2movie/providers/fire_store_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MovieService {
   MovieService._init();
@@ -11,9 +10,6 @@ class MovieService {
 
   final _fireStoreProvider = FireStoreProvider.instance;
   final _productCache = ProductCache.instance;
-
-  CollectionReference get movies =>
-      FirebaseFirestore.instance.collection('movies');
 
   Future<List<Movie>?> getMovies() async {
     try {
@@ -30,17 +26,43 @@ class MovieService {
 
   Future<Movie?> getMovieById(String id) async {
     try {
-      final querySnapshot = await movies.where('id', isEqualTo: id).get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        final DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
-        final data = documentSnapshot.data()! as Map<String, dynamic>;
-        return Movie.fromJson(data);
+      final movies = await getMovies();
+      if (movies == null) return null;
+      for (var movie in movies) {
+        if (movie.id == id) {
+          return movie;
+        }
       }
     } catch (e) {
       Exception(e);
     }
     return null;
+  }
+
+  Future<List<Movie>?> filterMoviesByRate() async {
+    final movies = await getMovies();
+    if (movies == null) return null;
+
+    movies.sort((a, b) => a.rate!.compareTo(b.rate!));
+    final sortedMovies = movies.reversed.toList();
+    return sortedMovies;
+  }
+
+  Future<List<Movie>?> topFiveMovies() async {
+    final movies = await getMovies();
+    if (movies == null) return null;
+
+    movies.sort((a, b) => a.rate!.compareTo(b.rate!));
+    final sortedMovies = movies.reversed.toList();
+    return sortedMovies.take(5).toList();
+  }
+
+  Future<List<Movie>?> filterMoviesByName() async {
+    final movies = await getMovies();
+    if (movies == null) return null;
+
+    movies.sort((a, b) => a.name!.compareTo(b.name!));
+    return movies;
   }
 
   void saveMovieToCache(Movie movie) {
