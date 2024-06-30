@@ -15,6 +15,16 @@ class User extends Equatable with IdModel, BaseFirebaseModel<User> {
     this.id,
   });
 
+  factory User.empty() {
+    return User(
+      emailAddress: '',
+      password: '',
+      profilePhotoUrl: '',
+      userName: '',
+      id: '',
+    );
+  }
+
   factory User.fromCredential(UserCredential credential) => User(
         emailAddress: credential.user?.email,
         profilePhotoUrl: credential.user?.photoURL,

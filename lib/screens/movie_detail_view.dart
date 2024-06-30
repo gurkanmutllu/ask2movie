@@ -25,37 +25,44 @@ class MovieDetailView extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Stack(
+        child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl: movie.imageUrl ?? '',
-              imageBuilder: (context, imageProvider) => Container(
-                height: 600,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withOpacity(1),
-                      ],
+            Stack(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: movie.imageUrl ?? '',
+                  imageBuilder: (context, imageProvider) => Container(
+                    height: 600,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(1),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                Padding(
+                  padding: PaddingItems.movieInfoColumnDetailViewPadding,
+                  child: _MovieInfoColumnDetailView(movie),
+                ),
+              ],
             ),
-            Padding(
-              padding: PaddingItems.movieInfoColumnDetailViewPadding,
-              child: _MovieInfoColumnDetailView(movie),
-            ),
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),

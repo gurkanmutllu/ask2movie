@@ -30,6 +30,7 @@ abstract class  LocaleKeys {
   static const editProfile_saveChanges = 'editProfile.saveChanges';
   static const editProfile = 'editProfile';
   static const home_homeTitle = 'home.homeTitle';
+  static const home_topFive = 'home.topFive';
   static const home_latest = 'home.latest';
   static const home = 'home';
   static const bookmarks_bookmarksTitle = 'bookmarks.bookmarksTitle';

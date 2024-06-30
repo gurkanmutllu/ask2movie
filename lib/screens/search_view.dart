@@ -34,7 +34,6 @@ class _SearchViewState extends State<SearchView> with SearchViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       appBar: AppBar(
         title: const Center(child: TitleWidget(title: 'Search.')),
       ),
@@ -44,35 +43,19 @@ class _SearchViewState extends State<SearchView> with SearchViewMixin {
             padding: PaddingItems.textFieldPadding,
             child: Column(
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                Padding(
+                  padding: PaddingItems.verticalPadding,
+                  child: TextField(
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: _searchMethod,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                      ),
+                      label: Center(child: Text('Search')),
                     ),
-                    label: Center(child: Text('Search')),
+                    controller: _searchController,
                   ),
-                  controller: _searchController,
-                ),
-                TextButton(
-                  child: const Text('Search'),
-                  onPressed: () async {
-                    final searchResult =
-                        await _searchService.search(_searchController.text);
-                    final searchMovies = <Movie>[];
-                    for (final dialogue in searchResult) {
-                      if (dialogue != null) {
-                        final movie =
-                            await _movieService.getMovieById(dialogue.id);
-                        if (movie != null) {
-                          searchMovies.add(movie);
-                        }
-                      }
-                    }
-                    setState(() {
-                      result = searchResult;
-                      movies = searchMovies;
-                    });
-                  },
                 ),
               ],
             ),
@@ -99,5 +82,22 @@ class _SearchViewState extends State<SearchView> with SearchViewMixin {
         ],
       ),
     );
+  }
+
+  void _searchMethod(value) async {
+    final searchResult = await _searchService.search(value);
+    final searchMovies = <Movie>[];
+    for (final dialogue in searchResult) {
+      if (dialogue != null) {
+        final movie = await _movieService.getMovieById(dialogue.id);
+        if (movie != null) {
+          searchMovies.add(movie);
+        }
+      }
+    }
+    setState(() {
+      result = searchResult;
+      movies = searchMovies;
+    });
   }
 }

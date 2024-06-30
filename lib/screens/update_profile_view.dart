@@ -109,6 +109,7 @@ class _UserInfoColumn extends StatelessWidget {
             inputType: TextInputType.name,
             user: user,
             value: 'userName',
+            text: user.userName ?? '',
           ),
           CustomUpdateTextButton(
             title: 'Update email address',
@@ -116,6 +117,7 @@ class _UserInfoColumn extends StatelessWidget {
             inputType: TextInputType.name,
             user: user,
             value: 'emailAddress',
+            text: user.emailAddress ?? '',
           ),
           CustomUpdateTextButton(
             title: 'Update password',
@@ -123,6 +125,7 @@ class _UserInfoColumn extends StatelessWidget {
             inputType: TextInputType.name,
             user: user,
             value: 'password',
+            text: '',
           ),
         ],
       ),
