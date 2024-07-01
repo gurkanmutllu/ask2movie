@@ -53,6 +53,11 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The application needs to use your microphone.</string>
 
+	<key>GIDClientID</key>
+	<!-- TODO Replace this value: -->
+	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
+	<string>1029458190354-tu4nttv7gtk5l6fe488euh9u77ukr34t.apps.googleusercontent.com</string>
+
 	<!-- Google Sign-in Section -->
 	<key>CFBundleURLTypes</key>
 	<array>

@@ -2,6 +2,7 @@ import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/texts/subtitle_widget.dart';
 import 'package:ask2movie/product/constants/string_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class CustomTextButtonBottomsheetWithImage extends StatelessWidget {
   const CustomTextButtonBottomsheetWithImage({
@@ -28,15 +29,23 @@ class CustomTextButtonBottomsheetWithImage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    aboutUsRow(
-                      nameString: StringConstants.aboutUsGurkan,
-                      imageUrl:
-                          'https://avatars.githubusercontent.com/u/79024035?v=4',
+                    InkWell(
+                      onTap: () => launchUrlString(
+                          'https://www.linkedin.com/in/gurkanmutllu/'),
+                      child: aboutUsRow(
+                        nameString: StringConstants.aboutUsGurkan,
+                        imageUrl:
+                            'https://avatars.githubusercontent.com/u/79024035?v=4',
+                      ),
                     ),
-                    aboutUsRow(
-                      nameString: StringConstants.aboutUsFatih,
-                      imageUrl:
-                          'https://avatars.githubusercontent.com/u/92013695?v=4',
+                    InkWell(
+                      onTap: () => launchUrlString(
+                          'https://www.linkedin.com/in/yuzgulfatih/'),
+                      child: aboutUsRow(
+                        nameString: StringConstants.aboutUsFatih,
+                        imageUrl:
+                            'https://avatars.githubusercontent.com/u/92013695?v=4',
+                      ),
                     ),
                     ElevatedButton(
                       child: const Text(

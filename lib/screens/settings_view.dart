@@ -106,6 +106,10 @@ class _SettingsViewState extends State<SettingsView>
                     title: LocaleKeys.settings_aboutUs.tr(),
                   ),
                   CustomTextButtonBottomsheet.m1(
+                    bottomsheetText: StringConstants.emailContact,
+                    title: StringConstants.contactUs,
+                  ),
+                  CustomTextButtonBottomsheet.m1(
                     bottomsheetText: StringConstants.privacyPolicy,
                     title: LocaleKeys.settings_privacyPolicy.tr(),
                   ),
