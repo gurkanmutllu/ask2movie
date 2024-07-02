@@ -115,22 +115,6 @@ class _SignInViewState extends State<SignInView>
                   buttonColor: Colors.transparent,
                   textColor: Colors.white,
                 ),
-                Padding(
-                  padding: PaddingItems.verticalPadding,
-                  child: Text(LocaleKeys.login_or.tr()),
-                ),
-                CustomElevatedButton.icon(
-                  onPressed: () async {
-                    final isSuccess = await addGoogleUser();
-                    if (isSuccess) {
-                      pushReplaceAll(const BottomNavBar());
-                    } else {}
-                  },
-                  buttonText: LocaleKeys.base_googleLogin.tr(
-                    args: [StringConstants.signInString],
-                  ),
-                  buttonIcon: Icons.g_mobiledata_outlined,
-                ),
               ],
             ),
           ),

@@ -23,16 +23,9 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView>
     with NavigationWrapperMixin, LoginViewMixin {
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
-  late final GlobalKey<FormState> _key;
-
   @override
   void initState() {
     super.initState();
-    _key = GlobalKey();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
   }
 
   @override
@@ -51,7 +44,7 @@ class _LoginViewState extends State<LoginView>
         child: Padding(
           padding: PaddingItems.topPadding2x,
           child: Form(
-            key: _key,
+            key: key,
             child: Column(
               children: [
                 const SizedBox(
@@ -63,7 +56,7 @@ class _LoginViewState extends State<LoginView>
                   validator: (value) => value!.isEmpty
                       ? LocaleKeys.base_couldNotEmpty.tr()
                       : null,
-                  controller: _emailController,
+                  controller: emailController,
                   labelText: LocaleKeys.base_email.tr(),
                   inputType: TextInputType.emailAddress,
                 ),
@@ -71,7 +64,7 @@ class _LoginViewState extends State<LoginView>
                   validator: (value) => value!.isEmpty
                       ? LocaleKeys.base_couldNotEmpty.tr()
                       : null,
-                  controller: _passwordController,
+                  controller: passwordController,
                   labelText: LocaleKeys.base_password.tr(),
                   inputType: TextInputType.text,
                   isObscure: true,
@@ -96,11 +89,7 @@ class _LoginViewState extends State<LoginView>
                   buttonColor: Colors.amber,
                   textColor: Colors.black,
                   onPressed: () async {
-                    final result = await login(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                      key: _key,
-                    );
+                    final result = await login();
                     if (result == true) {
                       pushReplaceAll(const BottomNavBar());
                     } else {

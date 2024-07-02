@@ -25,11 +25,16 @@ class AuthService {
     return null;
   }
 
-  Future<void> resetPassword({
+  Future<bool> resetPassword({
     required String email,
   }) async {
-    final result = await _authProvider.resetPassword(email);
-    return result;
+    try {
+      await _authProvider.resetPassword(email);
+      return true;
+    } catch (e) {
+      Exception(e);
+      return false;
+    }
   }
 
   Future<void> signOut() async {
@@ -52,7 +57,7 @@ class AuthService {
     return null;
   }
 
-  Future<UserCredential?> googleSignIn() async {
+  Future<UserCredential?> googleLogin() async {
     final googleUser = await GoogleSignIn().signIn();
     if (googleUser != null) {
       final googleAuth = await googleUser.authentication;
