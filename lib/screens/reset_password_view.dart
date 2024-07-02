@@ -2,7 +2,7 @@ import 'package:ask2movie/core/project_items/padding_items.dart';
 import 'package:ask2movie/customs/buttons/custom_text_button.dart';
 import 'package:ask2movie/customs/text_fields/custom_text_field.dart';
 import 'package:ask2movie/customs/texts/title_widget.dart';
-import 'package:ask2movie/services/auth_service.dart';
+import 'package:ask2movie/screens/mixins/reset_password_mixin.dart';
 import 'package:flutter/material.dart';
 
 class ResetPasswordView extends StatelessWidget with ResetPasswordMixin {
@@ -47,16 +47,5 @@ class ResetPasswordView extends StatelessWidget with ResetPasswordMixin {
         ),
       ),
     );
-  }
-}
-
-mixin ResetPasswordMixin {
-  final AuthService _authService = AuthService.instance;
-
-  Future<bool> resetPassword({
-    required String email,
-  }) async {
-    await _authService.resetPassword(email: email);
-    return true;
   }
 }

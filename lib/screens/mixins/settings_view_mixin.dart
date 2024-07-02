@@ -14,6 +14,7 @@ mixin SettingsViewMixin<T extends StatefulWidget> on State<T> {
 
   Future<void> updateUser(User user) async {
     final uid = await _authService.getCurrentUid();
+    await _authService.updateUser(userId: uid, user: user);
     return _userService.updateUser(uid, user);
   }
 }
